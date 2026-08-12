@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UniBench-NLP &mdash; Model Benchmarking Console</title>
+<meta name="description" content="Cross-domain, bias-corrected benchmarking console for comparing NLP-capable AI models.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%2308090a'/%3E%3Cpath d='M6 16 L10 8 L14 13 L18 6' stroke='%233987e5' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+
+<canvas id="bg-scene"></canvas>
+
+<div class="app">
+
+  <!-- ============================== NAV ============================== -->
+  <header class="topnav">
+    <div class="container topnav-inner">
+      <div class="brand">
+        <span class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 17 L9 8 L14 14 L20 5" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="5" r="1.6" fill="#3987e5"/><circle cx="9" cy="8" r="1.6" fill="#199e70"/><circle cx="14" cy="14" r="1.6" fill="#d95926"/><circle cx="4" cy="17" r="1.6" fill="#c98500"/></svg>
+        </span>
+        <span>UniBench<span style="color:var(--ink-muted)">-NLP</span></span>
+        <span class="brand-sub">v0.1 &middot; benchmarking console</span>
+      </div>
+
+      <nav class="nav-tabs" id="nav-tabs">
+        <div class="nav-tab active" data-view="overview">Overview</div>
+        <div class="nav-tab" data-view="configure">Configure</div>
+        <div class="nav-tab" data-view="run">Run</div>
+        <div class="nav-tab" data-view="calibrate">Calibrate</div>
+        <div class="nav-tab" data-view="results">Results</div>
+      </nav>
+
+      <div class="nav-status">
+        <span class="dot idle" id="run-dot"></span>
+        <span id="run-status-text">idle</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- ============================== OVERVIEW ============================== -->
+      <section class="view" id="view-overview" data-view="overview">
+        <div class="view-header" data-animate>
+          <div>
+            <span class="view-eyebrow">Cross-domain &middot; bias-corrected &middot; efficiency-aware</span>
+            <h1 class="view-title">A measurement instrument for AI model comparison</h1>
+            <p class="view-desc">Run the same models through the same tasks under the same rules, correct AI-judge bias against a human-rated sample, and rank on accuracy, fairness, and cost together &mdash; not a single misleading leaderboard number.</p>
+          </div>
+          <div class="flex flex-gap-3">
+            <button class="btn btn-primary" data-nav="run">Start a run &rarr;</button>
+          </div>
+        </div>
+
+        <div class="stat-row" id="overview-stats" data-animate>
+          <div class="stat-tile">
+            <div class="stat-label">Configured models</div>
+            <div class="stat-value" id="stat-models">&mdash;</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-label">Active tasks</div>
+            <div class="stat-value" id="stat-tasks">&mdash;</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-label">Scored records</div>
+            <div class="stat-value" id="stat-records">&mdash;</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-label">Judges calibrated</div>
+            <div class="stat-value" id="stat-calibrated">&mdash;</div>
+          </div>
+        </div>
+
+        <div class="grid grid-3" data-animate>
+          <div class="panel">
+            <div class="panel-title">01 &middot; Configure</div>
+            <p class="text-sm muted mt-4">Pick the model pool &mdash; live Groq models, Gemini, or a zero-cost mock backend &mdash; and the task suite. Same protocol for every model, every time.</p>
+          </div>
+          <div class="panel">
+            <div class="panel-title">02 &middot; Run</div>
+            <p class="text-sm muted mt-4">Each model answers every task item. Automatic metrics and a multi-AI-judge panel score every response, live, with full token/latency/cost telemetry.</p>
+          </div>
+          <div class="panel">
+            <div class="panel-title">03 &middot; Calibrate &amp; Compare</div>
+            <p class="text-sm muted mt-4">Rate a sample yourself to correct AI-judge bias, then inspect the Pareto-optimal model set per task &mdash; accuracy, fairness, and cost, together.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== CONFIGURE ============================== -->
+      <section class="view" id="view-configure" data-view="configure" hidden>
+        <div class="view-header" data-animate>
+          <div>
+            <span class="view-eyebrow">Model pool &amp; task suite</span>
+            <h1 class="view-title">Configure the benchmark</h1>
+            <p class="view-desc">Changes save to <code class="mono">config.yaml</code> directly &mdash; the same file the CLI reads.</p>
+          </div>
+          <button class="btn btn-primary" id="btn-save-config">Save configuration</button>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="panel" data-animate>
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Model pool</div>
+                <div class="panel-title-sub" id="model-count-sub">0 models</div>
+              </div>
+              <button class="btn btn-sm" id="btn-add-model">+ Add model</button>
+            </div>
+            <div id="model-list"></div>
+          </div>
+
+          <div class="panel" data-animate>
+            <div class="panel-header">
+              <div class="panel-title">Task suite</div>
+            </div>
+            <div id="task-list"></div>
+
+            <hr class="divider">
+
+            <div class="panel-title" style="margin-bottom: var(--sp-3)">Run settings</div>
+            <div class="grid grid-2" style="gap: var(--sp-3)">
+              <div class="field" style="margin-bottom:0">
+                <label class="field-label">Temperature</label>
+                <input class="input" type="number" id="cfg-temperature" step="0.1" min="0" max="2">
+              </div>
+              <div class="field" style="margin-bottom:0">
+                <label class="field-label">Max tokens</label>
+                <input class="input" type="number" id="cfg-max-tokens" step="50" min="50" max="4000">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel mt-5" data-animate>
+          <div class="panel-title">Judges</div>
+          <p class="text-sm muted mt-4" style="margin-bottom: var(--sp-3)">Which pool models cross-judge every response (including their own &mdash; a known self-preference bias risk the Calibrate step exists to catch).</p>
+          <div id="judge-list" class="flex flex-gap-2" style="flex-wrap:wrap"></div>
+        </div>
+      </section>
+
+      <!-- ============================== RUN ============================== -->
+      <section class="view" id="view-run" data-view="run" hidden>
+        <div class="view-header" data-animate>
+          <div>
+            <span class="view-eyebrow">Live execution</span>
+            <h1 class="view-title">Run the benchmark</h1>
+            <p class="view-desc">Calls every configured model on every configured task item. Rate-limit retries and reasoning-token headroom are handled automatically.</p>
+          </div>
+          <button class="btn btn-primary" id="btn-start-run">Start run</button>
+        </div>
+
+        <div class="panel" data-animate>
+          <div class="flex-between" style="margin-bottom: var(--sp-4)">
+            <div class="flex flex-gap-3" style="align-items:baseline">
+              <span class="stat-value mono" id="run-progress-count" style="font-size:1.3rem">0 / 0</span>
+              <span class="muted text-sm" id="run-progress-pct">0%</span>
+            </div>
+            <span class="pill" id="run-elapsed">00:00</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+          <div class="mt-5">
+            <div class="panel-title-sub" style="margin-bottom: var(--sp-2)">Live event feed</div>
+            <div class="log-feed" id="log-feed">
+              <div class="empty-state" style="padding: var(--sp-6)">
+                <p>No run in progress. Configure a model pool, then start a run.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== CALIBRATE ============================== -->
+      <section class="view" id="view-calibrate" data-view="calibrate" hidden>
+        <div class="view-header" data-animate>
+          <div>
+            <span class="view-eyebrow">Human-in-the-loop bias correction</span>
+            <h1 class="view-title">Calibrate the judges</h1>
+            <p class="view-desc">Rate a sample yourself &mdash; the same context an AI judge saw. Your ratings correct that judge's scores everywhere in the results.</p>
+          </div>
+          <div class="flex flex-gap-3">
+            <span class="pill" id="calib-progress-pill">0 rated</span>
+            <button class="btn" id="btn-fetch-calibration">Load samples</button>
+          </div>
+        </div>
+
+        <div id="calib-container" data-animate>
+          <div class="empty-state">
+            <p>Click &ldquo;Load samples&rdquo; to fetch a random set of AI-judge-scored responses to rate.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== RESULTS ============================== -->
+      <section class="view" id="view-results" data-view="results" hidden>
+        <div class="view-header" data-animate>
+          <div>
+            <span class="view-eyebrow">Multi-criteria leaderboard</span>
+            <h1 class="view-title">Results</h1>
+            <p class="view-desc">Pareto-optimal models per task &mdash; no single winner is assumed. Rotate the chart to inspect the accuracy/fairness surface.</p>
+          </div>
+          <button class="btn" id="btn-refresh-results">Refresh</button>
+        </div>
+
+        <div id="results-container" data-animate>
+          <div class="empty-state">
+            <p>No results yet. Run a benchmark to populate this view.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer style="border-top:1px solid var(--border-hairline); padding: var(--sp-5) 0; margin-top: var(--sp-7)">
+    <div class="container flex-between text-sm muted">
+      <span>UniBench-NLP &mdash; local benchmarking console</span>
+      <span class="mono">localhost only &middot; no data leaves this machine except to configured model APIs</span>
+    </div>
+  </footer>
+
+</div>
+
+<div id="toast-root"></div>
+
+<template id="tpl-model-row">
+  <div class="model-row">
+    <span class="swatch"></span>
+    <input class="input model-name" type="text" placeholder="name">
+    <select class="select model-provider"></select>
+    <input class="input model-id" type="text" placeholder="model id">
+    <button class="btn btn-sm btn-ghost btn-danger model-remove" title="Remove">&times;</button>
+  </div>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script type="module" src="js/scene.js"></script>
+<script type="module" src="js/chart3d.js"></script>
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

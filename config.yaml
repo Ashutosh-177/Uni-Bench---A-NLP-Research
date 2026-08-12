@@ -1,0 +1,60 @@
+# UniBench-NLP configuration.
+#
+# `models`: the fixed pool being compared. `provider` must be one of
+# mock | groq | gemini (see unibench/models/__init__.py PROVIDER_REGISTRY).
+# `model_id` is the provider's raw model identifier -- Groq and Google both
+# rename/deprecate model ids occasionally, so if you get a "model not
+# found" error, check the current list at:
+#   Groq:   https://console.groq.com/docs/models
+#   Gemini: https://ai.google.dev/gemini-api/docs/models
+#
+# Two Groq-hosted open-weight models + one Gemini model gives you 3 models
+# total, which is the minimum needed for the Pareto ranking and Friedman
+# significance test to be meaningful (see unibench/evaluation/aggregator.py).
+
+models:
+  - name: llama-3.3-70b
+    provider: groq
+    model_id: llama-3.3-70b-versatile
+  - name: qwen-3.6-27b
+    provider: groq
+    model_id: qwen/qwen3.6-27b
+  - name: gpt-oss-120b
+    provider: groq
+    model_id: openai/gpt-oss-120b
+  - name: gemini-3.6-flash
+    provider: gemini
+    # gemini-2.0-flash and gemini-2.5-flash are both RETIRED as of this
+    # writing ("no longer available to new users") -- confirmed against the
+    # live /v1beta/models list, not guessed. If this id 404s for you later,
+    # requery https://generativelanguage.googleapis.com/v1beta/models?key=YOUR_KEY
+    # and pick a current "-flash" entry (avoid "-preview" ids for
+    # reproducibility -- they can change under you between runs).
+    model_id: gemini-3.6-flash
+
+# Which of the models above also act as AI judges (cross-judging every
+# subject model's outputs, including their own -- a known self-preference
+# bias risk `calibrate` helps catch).
+judges:
+  - llama-3.3-70b
+  - qwen-3.6-27b
+  - gemini-3.6-flash
+
+# Which tasks (from unibench/tasks/__init__.py TASK_REGISTRY) to run.
+tasks:
+  - fairness
+  - summarization
+
+# max_tokens=800, not 400: reasoning models (e.g. Qwen's thinking mode)
+# spend a large chunk of their budget on hidden <think>...</think> reasoning
+# before the final answer; 400 was verified to leave Qwen's summarization
+# responses truncated mid-thought (empty output on every single item) --
+# 800 gives every model, thinking or not, enough headroom to actually finish.
+run:
+  temperature: 0.0
+  max_tokens: 800
+
+calibration:
+  sample_size: 10
+
+results_dir: results

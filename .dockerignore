@@ -1,0 +1,16 @@
+# Never bake secrets into the image -- injected as runtime env vars instead.
+.env
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+.git/
+
+# Generated output -- not needed in the image; on hosts with ephemeral
+# storage it's regenerated per-run anyway (see DEPLOY.md's storage note).
+results/
+results_mock/
+
+# Local-only smoke-test config, not needed in production images.
+config.mock.yaml

@@ -1,0 +1,33 @@
+# Smoke-test config: 3 fake, zero-cost "mock" models, no API keys needed.
+# Use this to verify the whole pipeline works before spending real API calls:
+#   python run_benchmark.py run --config config.mock.yaml
+#   python run_benchmark.py calibrate --config config.mock.yaml --n 6
+#   python run_benchmark.py report --config config.mock.yaml
+
+models:
+  - name: mock-a
+    provider: mock
+    model_id: mock-a
+  - name: mock-b
+    provider: mock
+    model_id: mock-b
+  - name: mock-c
+    provider: mock
+    model_id: mock-c
+
+judges:
+  - mock-a
+  - mock-b
+
+tasks:
+  - fairness
+  - summarization
+
+run:
+  temperature: 0.0
+  max_tokens: 400
+
+calibration:
+  sample_size: 6
+
+results_dir: results_mock

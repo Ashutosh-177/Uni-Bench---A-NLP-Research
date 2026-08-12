@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sum_energy",
+    "article": "City officials announced Tuesday that the municipal solar farm on the outskirts of town will begin supplying power to the grid next month, three months ahead of schedule. The 40-megawatt facility, built on a former landfill site, is expected to cover roughly 15 percent of the city's residential electricity demand during peak daylight hours. Officials credited the early completion to favorable weather during construction and said the project came in under its original budget of 62 million dollars. The city plans to use the savings to fund battery storage upgrades at two other substations next year.",
+    "reference_summary": "A city solar farm will start supplying power a month ahead of schedule and under budget, with savings redirected to battery storage upgrades."
+  },
+  {
+    "id": "sum_health",
+    "article": "A new study published this week found that adults who walked at least 7,000 steps a day had a significantly lower risk of early death compared to those who walked fewer than 5,000, regardless of walking speed. Researchers tracked over 2,000 participants for eleven years using wearable activity monitors. The effect was strongest among participants over the age of 60, though modest benefits appeared across all age groups. The study's authors cautioned that the results show correlation, not proof that walking more directly causes longer life, and called for further trials.",
+    "reference_summary": "A long-term study links walking at least 7,000 steps daily to lower mortality risk, especially in older adults, though the authors caution it shows correlation, not causation."
+  },
+  {
+    "id": "sum_transport",
+    "article": "The state transportation department will close a 12-mile stretch of the interstate highway for repaving starting next Monday, with work expected to continue for six weeks. Officials said the closure will affect the morning and evening commutes for an estimated 90,000 drivers and urged residents to use the marked detour routes or consider public transit during the closure. Emergency lanes will remain open for first responders. The department said the repaving project was moved up after inspectors found accelerated cracking following last winter's freeze-thaw cycles.",
+    "reference_summary": "A 12-mile highway stretch will close for six weeks of repaving affecting roughly 90,000 daily commuters, after inspectors found accelerated winter cracking."
+  },
+  {
+    "id": "sum_education",
+    "article": "A school district piloted a four-day school week at three middle schools this fall, extending each remaining school day by 45 minutes to preserve total instructional time. Early survey results show most teachers reported lower stress and less absenteeism, while a smaller share of parents said childcare on the fifth day was difficult to arrange. The district's superintendent said a formal decision on expanding the program districtwide will wait until standardized test scores from the full pilot year are available next summer.",
+    "reference_summary": "A district's four-day-school-week pilot has lowered teacher stress and absenteeism so far, though some parents cite childcare difficulties; a wider rollout awaits test-score data."
+  },
+  {
+    "id": "sum_agriculture",
+    "article": "Farmers in the region are reporting one of the strongest wheat harvests in a decade after a wetter-than-usual spring boosted yields across most fields. The state agriculture department estimated the total harvest at 18 percent above the five-year average, though it warned that a global oversupply could push prices down for growers this season. Several cooperatives are urging members to lock in forward contracts now rather than wait for the open market, citing volatile price swings in neighboring states over the past month.",
+    "reference_summary": "A wetter spring produced the region's strongest wheat harvest in a decade, but a global oversupply may push prices down, prompting calls to lock in forward contracts."
+  },
+  {
+    "id": "sum_technology",
+    "article": "A local manufacturing firm announced it will open a new assembly line dedicated to producing components for electric bicycles, creating an estimated 120 jobs over the next two years. Company executives said the expansion responds to a sharp rise in e-bike demand following state rebates introduced last year. The new line will occupy a previously vacant section of the company's existing factory, avoiding the need for new construction. Local officials welcomed the announcement, noting the factory has cut its workforce twice in the past decade amid slowing demand for its traditional products.",
+    "reference_summary": "A manufacturer will add an e-bike component assembly line at its existing factory, creating about 120 jobs over two years amid rising e-bike demand."
+  }
+]

@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated outputs -- reproducible from a run, don't need to be tracked.
+results/*.json
+results/*.csv
+results/*.png
+results/*.html
+results/*.md
+!results/.gitkeep

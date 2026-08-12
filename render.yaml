@@ -1,0 +1,37 @@
+# Render "Blueprint" -- lets Render create the service automatically from
+# this file (Dashboard -> New -> Blueprint -> point at your GitHub repo)
+# instead of clicking through the web-service setup by hand. Uses the
+# Dockerfile in this directory, so build/runtime behavior is identical to
+# `docker build` locally.
+#
+# Secrets are intentionally NOT set here (`sync: false` means "prompt me
+# in the dashboard instead") -- this file is meant to be committed to
+# your repo, and API keys / the dashboard password must never be.
+
+services:
+  - type: web
+    name: unibench-nlp
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: APP_USERNAME
+        sync: false
+      - key: APP_PASSWORD
+        sync: false
+
+    # UNCOMMENT to add a persistent disk (paid plans only) so config.yaml
+    # edits and results/ survive restarts and redeploys -- see DEPLOY.md
+    # "Persistent storage" for why the free plan loses this data on every
+    # redeploy without one, and how results_dir/CONFIG_PATH would need to
+    # point at the mounted path below.
+    # disk:
+    #   name: unibench-data
+    #   mountPath: /app/data-persist
+    #   sizeGB: 1

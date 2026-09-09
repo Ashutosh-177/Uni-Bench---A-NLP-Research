@@ -13,32 +13,38 @@
 # significance test to be meaningful (see unibench/evaluation/aggregator.py).
 
 models:
-  - name: llama-3.3-70b
-    provider: groq
-    model_id: llama-3.3-70b-versatile
+  # llama-3.3-70b-versatile was REMOVED from Groq's model list entirely
+  # between the previous run and this one -- confirmed by querying the live
+  # https://api.groq.com/openai/v1/models endpoint, not guessed (it 404'd
+  # with model_not_found on every single call). This is a real, dated
+  # instance of Gap 4 (commercial-API non-reproducibility), reported as an
+  # engineering finding rather than silently patched around. Replaced with
+  # gpt-oss-20b, the remaining unused Groq-hosted chat model, to keep the
+  # pool at 3 models without re-adding a since-retired id.
   - name: qwen-3.6-27b
     provider: groq
     model_id: qwen/qwen3.6-27b
   - name: gpt-oss-120b
     provider: groq
     model_id: openai/gpt-oss-120b
-  - name: gemini-3.6-flash
-    provider: gemini
-    # gemini-2.0-flash and gemini-2.5-flash are both RETIRED as of this
-    # writing ("no longer available to new users") -- confirmed against the
-    # live /v1beta/models list, not guessed. If this id 404s for you later,
-    # requery https://generativelanguage.googleapis.com/v1beta/models?key=YOUR_KEY
-    # and pick a current "-flash" entry (avoid "-preview" ids for
-    # reproducibility -- they can change under you between runs).
-    model_id: gemini-3.6-flash
+  - name: gpt-oss-20b
+    provider: groq
+    model_id: openai/gpt-oss-20b
+  # gemini-3.6-flash was REMOVED from this run's pool: its free tier caps at
+  # a hard 20 requests/day per model (confirmed via the live 429 response --
+  # quotaId GenerateRequestsPerDayPerProjectPerModel-FreeTier, quotaValue
+  # 20), which a 16-item x multi-judge run exhausts before finishing. The
+  # gemini backend itself remains implemented and connectivity-tested; it is
+  # simply not viable for a same-day full run on the free tier. Reported as
+  # a quantified instance of Gap 4 (commercial-API non-reproducibility)
+  # rather than silently worked around.
 
 # Which of the models above also act as AI judges (cross-judging every
 # subject model's outputs, including their own -- a known self-preference
 # bias risk `calibrate` helps catch).
 judges:
-  - llama-3.3-70b
   - qwen-3.6-27b
-  - gemini-3.6-flash
+  - gpt-oss-20b
 
 # Which tasks (from unibench/tasks/__init__.py TASK_REGISTRY) to run.
 tasks:

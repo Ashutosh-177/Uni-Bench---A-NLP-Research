@@ -39,6 +39,22 @@ class GeminiClient(ModelClient):
             "generationConfig": {
                 "temperature": temperature,
                 "maxOutputTokens": max_tokens,
+                # Gemini 3.x defaults to an internal "thinking" pass that
+                # draws from the SAME maxOutputTokens budget as the visible
+                # answer. Verified empirically: on the short fairness-probe
+                # prompts this left enough headroom to still answer, but on
+                # the longer summarization prompts it consumed the entire
+                # 800-token budget on hidden reasoning, returning empty text
+                # on 100% of items (finishReason=MAX_TOKENS, 0 visible
+                # tokens) -- the same silent-failure class as the Qwen and
+                # judge-budget findings, just on a third backend. Disabled
+                # outright (thinkingBudget=0) rather than raised, since this
+                # framework's standardization principle (Section III) calls
+                # for one shared, fixed budget across every model; a model
+                # that needs a variable, much larger budget to "think" isn't
+                # comparable to the others under that budget in the first
+                # place.
+                "thinkingConfig": {"thinkingBudget": 0},
             },
         }
         if system:

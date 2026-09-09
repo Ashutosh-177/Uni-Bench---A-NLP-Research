@@ -78,6 +78,33 @@ function goTo(name) {
   if (name === "overview") loadOverview();
   if (name === "configure") loadConfigure();
   if (name === "results") loadResults();
+  if (name === "calibrate") loadCalibrateHistory();
+}
+
+// Shows what calibration data already exists (from a previous CLI or
+// dashboard session) so this view doesn't read as "nothing has been
+// calibrated yet" right next to a Results view that clearly has been --
+// the two surfaces read the exact same /results/summary corrections.
+async function loadCalibrateHistory() {
+  const el = document.getElementById("calib-history");
+  try {
+    const data = await apiGet("/results/summary");
+    const calibrated = Object.entries(data.corrections).filter(([, c]) => c.method !== "uncalibrated");
+    if (!calibrated.length) { el.innerHTML = ""; return; }
+    const rows = calibrated.map(([name, c]) => `
+      <div class="flex flex-gap-2" style="align-items:baseline; margin-bottom:6px">
+        <span class="pill pill-good">${name}</span>
+        <span class="text-sm muted">${c.detail}</span>
+      </div>`).join("");
+    el.innerHTML = `
+      <div class="panel mt-5">
+        <div class="panel-title">Already calibrated (from a previous session)</div>
+        <div class="mt-4">${rows}</div>
+        <p class="text-sm muted mt-4">New ratings below add to this sample and are folded into every score in Results immediately.</p>
+      </div>`;
+  } catch (e) {
+    el.innerHTML = "";
+  }
 }
 
 document.getElementById("nav-tabs").addEventListener("click", (e) => {
@@ -214,18 +241,19 @@ function renderJudgeList() {
   state.config.models.forEach((m, i) => {
     const active = state.config.judges.includes(m.name);
     const chip = document.createElement("label");
-    chip.className = "model-chip";
+    chip.className = `model-chip ${active ? "judge-active" : "judge-inactive"}`;
     chip.style.cursor = "pointer";
-    chip.style.opacity = active ? "1" : "0.5";
     chip.innerHTML = `
       <span class="swatch" style="background:${seriesColorHex(i)}"></span>
       <input type="checkbox" style="display:none" ${active ? "checked" : ""}>
       ${m.name}
+      <span class="judge-state-label">${active ? "✓ judging" : "not judging"}</span>
     `;
     chip.querySelector("input").addEventListener("change", (e) => {
       if (e.target.checked) { if (!state.config.judges.includes(m.name)) state.config.judges.push(m.name); }
       else { state.config.judges = state.config.judges.filter(j => j !== m.name); }
-      chip.style.opacity = e.target.checked ? "1" : "0.5";
+      chip.className = `model-chip ${e.target.checked ? "judge-active" : "judge-inactive"}`;
+      chip.querySelector(".judge-state-label").textContent = e.target.checked ? "✓ judging" : "not judging";
     });
     list.appendChild(chip);
   });
@@ -465,6 +493,18 @@ async function loadResults() {
     </div>
   `;
 
+  // Illustrative paid-tier cost: this run is entirely free-tier ($0 for
+  // every model), which removes cost as a Pareto-discriminating axis. Groq's
+  // published per-output-token rates (accessed while preparing the
+  // accompanying paper) applied to each model's measured token count show
+  // what WOULD discriminate on a paid tier -- not a real charge.
+  const OUTPUT_PRICE_PER_1M = { "qwen-3.6-27b": 3.00, "gpt-oss-120b": 0.60, "gpt-oss-20b": 0.30 };
+  function illustrativeCost(model, tokens) {
+    const rate = OUTPUT_PRICE_PER_1M[model];
+    if (rate == null || tokens == null) return null;
+    return (tokens / 1e6) * rate;
+  }
+
   data.tasks.forEach((task) => {
     const rows = data.summary.filter(r => r.task === task);
     const friedman = data.friedman.find(f => f.task === task);
@@ -485,7 +525,8 @@ async function loadResults() {
           <table class="data-table">
             <thead><tr>
               <th>Model</th><th class="num">Judge score</th><th class="num">Composite</th>
-              <th class="num">Cost/query</th><th class="num">Latency</th><th>Pareto-optimal</th>
+              <th class="num">Cost/query</th><th class="num" title="Groq's published per-output-token rate applied to measured tokens -- not a real charge, this run used free-tier access throughout.">Illustrative paid cost&nbsp;†</th>
+              <th class="num">Latency</th><th>Pareto-optimal</th>
             </tr></thead>
             <tbody>
               ${rows.map(r => `
@@ -494,12 +535,14 @@ async function loadResults() {
                   <td class="num">${fmt(r.avg_judge_score)}</td>
                   <td class="num">${fmt(r.composite_quick_glance)}</td>
                   <td class="num">$${fmt(r.cost_usd, 4)}</td>
+                  <td class="num">$${fmt(illustrativeCost(r.model, r.tokens), 6)}</td>
                   <td class="num">${fmt(r.latency_s, 2)}s</td>
                   <td>${r.pareto_optimal ? `<span class="pill pill-good">✓ pareto</span>` : `<span class="pill">dominated</span>`}</td>
                 </tr>
               `).join("")}
             </tbody>
           </table>
+          <p class="text-sm muted mt-3">&dagger; Illustrative only, using Groq's published per-output-token rate applied to measured tokens for this run &mdash; every model here ran on a $0 free tier, so real cost cannot discriminate between them; this column shows what would.</p>
         </div>
       </div>
     `;

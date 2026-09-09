@@ -66,7 +66,19 @@ def judge_item(judge: ModelClient, task: Task, item: TaskItem,
                 outputs: dict[str, str]) -> JudgeResult:
     context = task.build_judge_context(item, outputs)
     prompt = f"{task.rubric}\n\n---\n{context}\n---\n\nRespond with ONLY the JSON object."
-    response = judge.generate(prompt, temperature=0.0, max_tokens=150)
+    # max_tokens=150 was verified to make a reasoning-mode judge (Qwen-3.6-27B)
+    # fail SILENTLY -- response.ok stays True (the API returns 200), but the
+    # entire budget is consumed by hidden <think> reasoning before any JSON
+    # is emitted, so every single one of that judge's scores comes back
+    # unparseable. Empirically confirmed the same judging prompt converges
+    # to a real answer at ~1046 tokens (not truncated -- identical output at
+    # 1200 and 2000); 1200 is used as a verified-sufficient budget rather
+    # than a guessed one. This is the same class of failure as the
+    # max_tokens=800 fix for subject responses (Section on Engineering
+    # Findings), just in the judge code path, where it went undetected
+    # because a null score was already handled gracefully rather than
+    # flagged as a budget problem.
+    response = judge.generate(prompt, temperature=0.0, max_tokens=1200)
 
     if not response.ok:
         return JudgeResult(judge_name=judge.name, score=None,

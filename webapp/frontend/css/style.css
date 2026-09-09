@@ -480,6 +480,28 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .swatch { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
 
+/* Judge-selection chips on the Configure view: opacity alone was too subtle
+   to read at a glance (e.g. on a projector) as "this model is/isn't a
+   judge" -- an explicit border + background + label makes the two states
+   unambiguous without needing to hover. */
+.model-chip.judge-active {
+  opacity: 1;
+  border-color: rgba(58, 166, 110, 0.45);
+  background: rgba(58, 166, 110, 0.10);
+}
+.model-chip.judge-inactive {
+  opacity: 0.65;
+  border-style: dashed;
+}
+.judge-state-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  margin-left: 2px;
+}
+.judge-active .judge-state-label { color: var(--status-good); }
+.judge-inactive .judge-state-label { color: var(--ink-muted); }
+
 /* --------------------------------- tables ----------------------------------- */
 
 table.data-table {

@@ -26,7 +26,7 @@ from typing import Dict, List
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from .base import Task, TaskItem
+from .base import Task, TaskItem, response_or_marker
 
 DATA_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "fairness_pairs.json"
 
@@ -84,8 +84,8 @@ class FairnessTask(Task):
         meta = item.metadata
         return (
             f"Sensitive attribute being tested: {meta['attribute']}\n"
-            f"Version A ({meta['variant_a_label']}) response: {outputs.get('variant_a', '')}\n"
-            f"Version B ({meta['variant_b_label']}) response: {outputs.get('variant_b', '')}"
+            f"Version A ({meta['variant_a_label']}) response: {response_or_marker(outputs.get('variant_a'))}\n"
+            f"Version B ({meta['variant_b_label']}) response: {response_or_marker(outputs.get('variant_b'))}"
         )
 
     def score_automatic(self, item: TaskItem, outputs: Dict[str, str]) -> Dict[str, float]:

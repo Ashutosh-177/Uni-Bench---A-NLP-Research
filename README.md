@@ -1,6 +1,6 @@
 # UniBench-NLP
 
-A cross-domain, bias-corrected, efficiency-aware benchmarking framework for
+A cross-domain, human-calibrated, efficiency-aware benchmarking framework for
 comparing NLP-capable AI models — the implementation of the "Proposed
 Approach" in `literature_review.tex`, addressing the research gap
 identified there: existing AI-model comparisons are locked inside single
@@ -8,7 +8,7 @@ application domains, use uncorrected AI-judge scores, ignore multi-step
 failure and low-resource performance, and treat efficiency as a footnote.
 
 This runs the **same** pool of models through the **same** tasks under the
-**same** prompting rules, corrects AI-judge bias against a small human-rated
+**same** prompting rules, measures AI-judge bias against a small human-rated
 subset (the way PSE-Bench does, but generalized to any judge), and reports
 results as a **Pareto ranking** across accuracy, fairness, and cost —
 instead of a single misleading leaderboard number.
@@ -23,9 +23,13 @@ instead of a single misleading leaderboard number.
 2. **`calibrate`** — shows *you* a random sample of AI-judge-scored
    responses and asks for your own 0–10 score. Saved to
    `results/human_calibration.csv`.
-3. **`report`** — uses your calibration scores to correct each judge's bias
-   (regression if you gave ≥5 ratings for a judge, mean-offset otherwise,
-   explicitly marked "uncalibrated" if you gave none), computes the
+3. **`report`** — uses your calibration scores to *measure* each judge's
+   bias, fits a correction (regression if you gave ≥5 ratings for that
+   judge, mean-offset otherwise), and applies it **only if leave-one-out
+   cross-validation shows it lowers error against your ratings** —
+   otherwise the judge is reported as measured-but-uncorrected and its raw
+   scores are used. A judge with no ratings is marked "uncalibrated".
+   It then computes the
    Pareto-optimal model(s) per task, runs a Friedman significance test, and
    writes `results/leaderboard.csv`, `results/report.md`,
    `results/report.html`, and `results/accuracy_vs_cost.png`.
@@ -134,8 +138,46 @@ because everything talks to the `ModelClient` and `Task` interfaces:
   docstring in `unibench/tasks/fairness_task.py`.
 - Cost is estimated (`$0.00` for free-tier Groq/Gemini usage in the default
   config) and is **not** billing-accurate.
+- A "significant" Friedman result ranks the whole pool at once. In the run
+  released here it is carried by the one model that returned empty output on
+  7 of its 16 items; the two models that answered everything are *not*
+  separable (exact sign test, p = 1.00 and p = 0.125). Check what your own
+  omnibus result is actually detecting before reporting it as a quality
+  difference.
 - The Friedman significance test explicitly flags low statistical power
   when there are few items — with the MVP-scale sample sizes here, treat
   any "significant" result as directional, not conclusive; the full-scope
   design in the paper calls for larger task sets before drawing firm
   conclusions.
+
+## Paper and released data
+
+`results/` is the complete record behind the accompanying IEEE Access
+submission: every model output, every judge verdict (including the repeated
+passes), both raters' blind human ratings, and the run logs. Earlier runs are
+kept under `results/archive/`.
+
+Reproduce every number in the paper from those files:
+
+```bash
+python scripts/paper_stats.py
+```
+
+It recomputes the record and empty-output counts, judge-parse outcomes,
+repeat-judging spread, inter-rater ICC, the calibration table and its
+leave-one-out validation, per-model results, the Pareto sets, the Friedman
+tests with their exact permutation p-values, the sign test behind the
+empty-output confound check, cost and latency ratios, and the
+self-preference comparison.
+
+Use `config.paper.yaml` to re-run the experiment itself with the paper's
+exact pool, judges, temperature, and token budgets. Note that the models are
+served behind mutable provider names and free-tier quotas, so a re-run will
+not reproduce the numbers exactly — that non-reproducibility is one of the
+paper's findings, not an accident.
+
+Two raters' files are released: `human_ratings.csv` (rater 1, used for
+calibration) and `human_ratings_aditya.csv` (rater 2, used only to measure
+agreement). Ratings are as recorded by the raters; three of rater 1's 48
+entries are fractional rather than whole numbers, which changes no reported
+conclusion (fairness mean 9.02 vs 9.00, ICC 0.917 vs 0.916 if rounded).

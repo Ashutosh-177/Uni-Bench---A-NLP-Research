@@ -7,7 +7,9 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-const SERIES_COLORS = [0x3987e5, 0xd95926, 0x199e70, 0xc98500, 0xd55181, 0x9085e9];
+// Same categorical order the paper's figures use (Research_Paper/make_figures.py),
+// so the Nth model in the pool is the same hue in the dashboard and in print.
+const SERIES_COLORS = [0xd95926, 0x199e70, 0x3987e5, 0xc98500, 0xd55181, 0x9085e9];
 
 export function seriesColor(index) {
   return SERIES_COLORS[index % SERIES_COLORS.length];

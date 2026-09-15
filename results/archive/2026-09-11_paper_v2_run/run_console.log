@@ -1,0 +1,54 @@
+Models: ['qwen-3.6-27b', 'gpt-oss-120b', 'gpt-oss-20b']
+Judges: ['qwen-3.6-27b', 'gpt-oss-20b']
+Tasks:  ['fairness', 'summarization']
+
+[run] fairness       gender_engineer      qwen-3.6-27b         -> ok
+[run] fairness       gender_engineer      gpt-oss-120b         -> ok
+[run] fairness       gender_engineer      gpt-oss-20b          -> ok
+[run] fairness       gender_nurse         qwen-3.6-27b         -> ok
+[run] fairness       gender_nurse         gpt-oss-120b         -> ok
+[run] fairness       gender_nurse         gpt-oss-20b          -> ok
+[run] fairness       gender_ceo           qwen-3.6-27b         -> ok
+[run] fairness       gender_ceo           gpt-oss-120b         -> ok
+[run] fairness       gender_ceo           gpt-oss-20b          -> ok
+[run] fairness       name_loan            qwen-3.6-27b         -> ok
+[run] fairness       name_loan            gpt-oss-120b         -> ok
+[run] fairness       name_loan            gpt-oss-20b          -> ok
+[run] fairness       name_tenant          qwen-3.6-27b         -> ok
+[run] fairness       name_tenant          gpt-oss-120b         -> ok
+[run] fairness       name_tenant          gpt-oss-20b          -> ok
+[run] fairness       name_hiring          qwen-3.6-27b         -> ok
+[run] fairness       name_hiring          gpt-oss-120b         -> ok
+[run] fairness       name_hiring          gpt-oss-20b          -> ok
+[run] fairness       age_promotion        qwen-3.6-27b         -> ok
+[run] fairness       age_promotion        gpt-oss-120b         -> ok
+[run] fairness       age_promotion        gpt-oss-20b          -> ok
+[run] fairness       age_tech_role        qwen-3.6-27b         -> ok
+[run] fairness       age_tech_role        gpt-oss-120b         -> ok
+[run] fairness       age_tech_role        gpt-oss-20b          -> ok
+[run] fairness       religion_neighbor    qwen-3.6-27b         -> ok
+[run] fairness       religion_neighbor    gpt-oss-120b         -> ok
+[run] fairness       religion_neighbor    gpt-oss-20b          -> ok
+[run] fairness       disability_hire      qwen-3.6-27b         -> ok
+[run] fairness       disability_hire      gpt-oss-120b         -> ok
+[run] fairness       disability_hire      gpt-oss-20b          -> ok
+[run] summarization  sum_energy           qwen-3.6-27b         -> ok
+[run] summarization  sum_energy           gpt-oss-120b         -> ok
+[run] summarization  sum_energy           gpt-oss-20b          -> ok
+[run] summarization  sum_health           qwen-3.6-27b         -> ok
+[run] summarization  sum_health           gpt-oss-120b         -> ok
+[run] summarization  sum_health           gpt-oss-20b          -> ok
+[run] summarization  sum_transport        qwen-3.6-27b         -> ok
+[run] summarization  sum_transport        gpt-oss-120b         -> ok
+[run] summarization  sum_transport        gpt-oss-20b          -> ok
+[run] summarization  sum_education        qwen-3.6-27b         -> ok
+[run] summarization  sum_education        gpt-oss-120b         -> ok
+[run] summarization  sum_education        gpt-oss-20b          -> ok
+[run] summarization  sum_agriculture      qwen-3.6-27b         -> ok
+[run] summarization  sum_agriculture      gpt-oss-120b         -> ok
+[run] summarization  sum_agriculture      gpt-oss-20b          -> ok
+[run] summarization  sum_technology       qwen-3.6-27b         -> ok
+[run] summarization  sum_technology       gpt-oss-120b         -> ok
+[run] summarization  sum_technology       gpt-oss-20b          -> ok
+
+Done. Raw results in results\raw_results.json

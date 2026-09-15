@@ -69,10 +69,16 @@ def run_benchmark(models: List[ModelClient], tasks: List[Task], judges: List[Mod
                         status = "ERROR" if had_error else "ok"
                         print(f"[run] {task.name:14s} {item.id:20s} {model.name:20s} -> {status}")
 
+                    # A well-formed HTTP 200 with empty text is not an API error, so it is
+                    # recorded separately; otherwise it only shows up later as NaN metrics.
+                    empty_variants = [v for v, text in outputs.items() if not (text or "").strip()]
                     automatic = {} if had_error else task.score_automatic(item, outputs)
 
+                    # Empty outputs are not sent to the judges: they scored a pair with one
+                    # empty response as unfair treatment, and graded the reference answer
+                    # in place of an empty summary. The audit counts them instead.
                     judge_records = []
-                    if not had_error:
+                    if not had_error and not empty_variants:
                         for judge in judges:
                             result = judge_item(judge, task, item, outputs)
                             telemetry.log(
@@ -87,6 +93,7 @@ def run_benchmark(models: List[ModelClient], tasks: List[Task], judges: List[Mod
                                 "judge_name": result.judge_name,
                                 "score": result.score,
                                 "reason": result.reason,
+                                "call_failed": not result.response.ok,
                             })
 
                     record = {
@@ -100,6 +107,9 @@ def run_benchmark(models: List[ModelClient], tasks: List[Task], judges: List[Mod
                         "latency_s": latency,
                         "tokens": prompt_tokens + completion_tokens,
                         "error": had_error,
+                        "empty_outputs": empty_variants,
+                        "judging_skipped": bool(empty_variants) and not had_error,
+                        "unparsed_judges": [j["judge_name"] for j in judge_records if j["score"] is None],
                     }
                     raw_results.append(record)
                     _save(raw_results, raw_results_path)
@@ -107,7 +117,7 @@ def run_benchmark(models: List[ModelClient], tasks: List[Task], judges: List[Mod
                     if on_progress:
                         on_progress({
                             "task": task.name, "item_id": item.id, "model": model.name,
-                            "status": "error" if had_error else "ok",
+                            "status": "error" if had_error else ("empty" if empty_variants else "ok"),
                             "completed": len(raw_results),
                             "avg_judge_score": (
                                 sum(j["score"] for j in judge_records if j["score"] is not None)

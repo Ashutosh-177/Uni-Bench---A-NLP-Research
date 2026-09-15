@@ -13,6 +13,13 @@ and applies it to every AI-judge score before the final report.
   bias (offset) and scale (a judge that's not just lenient but also
   compresses its range gets corrected for that too).
 - With fewer points, falls back to a constant mean-offset correction.
+- Either way the fit is then VALIDATED by leave-one-out cross-validation
+  and applied only if it lowers the mean absolute error against the human
+  ratings. A judge that already agrees closely with its raters gains
+  nothing from a fitted correction: the fit adds estimation noise instead
+  of removing bias, which is what happened to all three judges in the
+  accompanying paper. Such a judge is reported as measured-but-uncorrected,
+  with the measured offset kept in the report.
 - With zero points for a judge, applies NO correction and the report
   explicitly marks that judge's scores as "uncalibrated" -- silently
   trusting an unchecked judge is exactly the failure mode this project
@@ -28,6 +35,7 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 
 MIN_POINTS_FOR_REGRESSION = 5
+MIN_POINTS_FOR_VALIDATION = 3
 
 
 @dataclass
@@ -46,6 +54,32 @@ class JudgeCorrection:
         return float(np.clip(corrected, 0.0, 10.0))
 
 
+def _fit(pairs: List[tuple]) -> tuple:
+    """Returns (slope, intercept, method) for one judge's (ai, human) pairs."""
+    ai = np.array([p[0] for p in pairs])
+    human = np.array([p[1] for p in pairs])
+    if len(pairs) >= MIN_POINTS_FOR_REGRESSION:
+        model = LinearRegression().fit(ai.reshape(-1, 1), human)
+        return float(model.coef_[0]), float(model.intercept_), "regression"
+    return 1.0, float(-np.mean(ai - human)), "mean_offset"
+
+
+def _apply(slope: float, intercept: float, ai_score: float) -> float:
+    return float(np.clip(slope * ai_score + intercept, 0.0, 10.0))
+
+
+def _leave_one_out_mae(pairs: List[tuple]) -> float:
+    """Mean absolute error of the fitted correction on held-out points: refit
+    without each point, then score that point. This is what decides whether a
+    correction is worth applying at all."""
+    errors = []
+    for i in range(len(pairs)):
+        rest = pairs[:i] + pairs[i + 1:]
+        slope, intercept, _ = _fit(rest)
+        errors.append(abs(_apply(slope, intercept, pairs[i][0]) - pairs[i][1]))
+    return float(np.mean(errors))
+
+
 def compute_bias_corrections(calibration_rows: List[dict]) -> Dict[str, JudgeCorrection]:
     """calibration_rows: list of {"judge_name": str, "ai_score": float,
     "human_score": float} collected by the `calibrate` CLI step.
@@ -62,13 +96,27 @@ def compute_bias_corrections(calibration_rows: List[dict]) -> Dict[str, JudgeCor
         human_scores = np.array([p[1] for p in pairs])
         mean_gap = float(np.mean(ai_scores - human_scores))
 
-        if len(pairs) >= MIN_POINTS_FOR_REGRESSION:
-            model = LinearRegression().fit(ai_scores.reshape(-1, 1), human_scores)
+        slope, intercept, method = _fit(pairs)
+        raw_mae = float(np.mean(np.abs(ai_scores - human_scores)))
+        loo_mae = (_leave_one_out_mae(pairs) if len(pairs) >= MIN_POINTS_FOR_VALIDATION
+                   else float("nan"))
+
+        if loo_mae == loo_mae and loo_mae >= raw_mae:
+            # The fit does not survive validation: keep the measurement, drop the correction.
+            corrections[judge_name] = JudgeCorrection(
+                judge_name=judge_name, method="measured_uncorrected", n_points=len(pairs),
+                detail=f"measured {mean_gap:+.2f} pt offset from {len(pairs)} human-rated points; "
+                       f"correction NOT applied because it did not reduce held-out error "
+                       f"({raw_mae:.2f} -> {loo_mae:.2f} MAE)",
+                _slope=1.0, _intercept=0.0,
+            )
+        elif method == "regression":
             corrections[judge_name] = JudgeCorrection(
                 judge_name=judge_name, method="regression", n_points=len(pairs),
                 detail=f"regression-corrected from {len(pairs)} human-rated points "
-                       f"(raw judge was {mean_gap:+.2f} pt on average)",
-                _slope=float(model.coef_[0]), _intercept=float(model.intercept_),
+                       f"(raw judge was {mean_gap:+.2f} pt on average; held-out MAE "
+                       f"{raw_mae:.2f} -> {loo_mae:.2f})",
+                _slope=slope, _intercept=intercept,
             )
         else:
             corrections[judge_name] = JudgeCorrection(
@@ -76,7 +124,7 @@ def compute_bias_corrections(calibration_rows: List[dict]) -> Dict[str, JudgeCor
                 detail=f"mean-offset corrected from only {len(pairs)} human-rated "
                        f"point(s) ({mean_gap:+.2f} pt) -- add more calibration "
                        f"samples for a more reliable correction",
-                _slope=1.0, _intercept=-mean_gap,
+                _slope=slope, _intercept=intercept,
             )
     return corrections
 

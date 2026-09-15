@@ -3,13 +3,14 @@
 
 Usage:
     python run_benchmark.py run       [--config config.yaml]
-    python run_benchmark.py calibrate [--config config.yaml] [--n 10]
+    python run_benchmark.py calibrate [--config config.yaml] [--n N]
     python run_benchmark.py report    [--config config.yaml]
 
 Typical workflow: run these three in order. `run` calls every configured
-model on every task and saves raw_results.json. `calibrate` has YOU score a
-small sample so AI-judge bias can be corrected. `report` produces the final
-leaderboard, Pareto summary, and chart.
+model on every task and saves raw_results.json. `calibrate` has YOU rate
+the outputs blind (without seeing the model or any judge score) so AI-judge
+bias can be corrected. `report` produces the final leaderboard, Pareto
+summary, data-completeness audit, and chart.
 """
 
 from __future__ import annotations
@@ -65,9 +66,8 @@ def cmd_run(args: argparse.Namespace) -> None:
 
 
 def cmd_calibrate(args: argparse.Namespace) -> None:
-    cfg, _, _, _, results_dir = load_config(args.config)
-    sample_size = args.n or cfg.get("calibration", {}).get("sample_size", 10)
-    run_calibration(results_dir, sample_size=sample_size)
+    _, _, _, _, results_dir = load_config(args.config)
+    run_calibration(results_dir, limit=args.n, rater=args.rater)
 
 
 def cmd_report(args: argparse.Namespace) -> None:
@@ -91,8 +91,12 @@ def main() -> None:
                            help="Run every configured model on every configured task.")
 
     calibrate_parser = subparsers.add_parser("calibrate", parents=[config_parent],
-                                              help="Interactively rate a sample for bias correction.")
-    calibrate_parser.add_argument("--n", type=int, default=None, help="Number of items to rate (overrides config.yaml).")
+                                              help="Blind human rating of the outputs, for judge bias correction.")
+    calibrate_parser.add_argument("--n", type=int, default=None,
+                                  help="Rate at most N outputs this session (default: all not yet rated).")
+    calibrate_parser.add_argument("--rater", default=None,
+                                  help="Name of an additional rater; saves to a separate file used only "
+                                       "for inter-rater agreement, not for judge calibration.")
 
     subparsers.add_parser("report", parents=[config_parent],
                            help="Build the leaderboard, Pareto summary, and chart.")

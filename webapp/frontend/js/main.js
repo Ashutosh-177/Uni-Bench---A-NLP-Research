@@ -52,6 +52,21 @@ const state = {
   colorOf: new Map(), // model name -> palette index (stable per config order)
 };
 
+// Viewers who ask their OS for reduced motion get the same interface without the
+// entrance tweens: every animated element is placed directly in its final state.
+const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (REDUCED_MOTION) {
+  const settle = (targets, vars) => {
+    const { duration, delay, stagger, ease, onComplete, ...end } = vars;
+    gsap.set(targets, end);
+    if (onComplete) onComplete();
+  };
+  const realTo = gsap.to.bind(gsap);
+  gsap.to = (targets, vars) => settle(targets, vars);
+  gsap.fromTo = (targets, from, to) => settle(targets, to);
+  void realTo;
+}
+
 function refreshColorMap() {
   state.colorOf.clear();
   (state.config?.models || []).forEach((m, i) => state.colorOf.set(m.name, i));
@@ -75,11 +90,17 @@ function goTo(name) {
   document.querySelectorAll(".nav-tab").forEach((tab) => {
     tab.classList.toggle("active", tab.dataset.view === name);
   });
+  if (window.location.hash.slice(1) !== name) window.location.hash = name;
   if (name === "overview") loadOverview();
   if (name === "configure") loadConfigure();
   if (name === "results") loadResults();
   if (name === "calibrate") loadCalibrateHistory();
 }
+
+window.addEventListener("hashchange", () => {
+  const v = window.location.hash.slice(1);
+  if (views.includes(v)) goTo(v);
+});
 
 // Shows what calibration data already exists (from a previous CLI or
 // dashboard session) so this view doesn't read as "nothing has been
@@ -407,16 +428,11 @@ function renderNextCalibCard() {
         <div class="flex flex-gap-2">
           <span class="pill">${cand.task}</span>
           <span class="pill">${cand.item_id}</span>
-          <span class="pill">model: ${cand.model}</span>
         </div>
         <span class="muted text-sm mono">${calibQueue.length} remaining</span>
       </div>
       <div class="calib-context mt-4">${escapeHtml(cand.context)}</div>
-      <div class="calib-ai-note">
-        <span class="muted">AI judge (${cand.judge_name}):</span>
-        <strong>${cand.ai_score}/10</strong>
-        <span class="muted">&ldquo;${escapeHtml(cand.ai_reason)}&rdquo;</span>
-      </div>
+      <p class="text-sm muted mt-3">Rated blind: the model and the judge's score are hidden so they cannot anchor your rating.</p>
       <div class="score-slider-row">
         <span class="muted text-sm">Your score</span>
         <input type="range" class="score-slider" min="0" max="10" step="0.5" value="5" id="calib-slider">
@@ -526,7 +542,9 @@ async function loadResults() {
             <thead><tr>
               <th>Model</th><th class="num">Judge score</th><th class="num">Composite</th>
               <th class="num">Cost/query</th><th class="num" title="Groq's published per-output-token rate applied to measured tokens -- not a real charge, this run used free-tier access throughout.">Illustrative paid cost&nbsp;†</th>
-              <th class="num">Latency</th><th>Pareto-optimal</th>
+              <th class="num">Latency</th>
+              <th class="num" title="Items with every automatic metric defined / total items; empty responses are counted separately.">Valid items</th>
+              <th>Pareto-optimal</th>
             </tr></thead>
             <tbody>
               ${rows.map(r => `
@@ -537,6 +555,7 @@ async function loadResults() {
                   <td class="num">$${fmt(r.cost_usd, 4)}</td>
                   <td class="num">$${fmt(illustrativeCost(r.model, r.tokens), 6)}</td>
                   <td class="num">${fmt(r.latency_s, 2)}s</td>
+                  <td class="num">${r.n_valid_auto ?? "—"}/${r.n_items ?? "—"}${r.n_empty_items ? ` <span class="pill">${r.n_empty_items} empty</span>` : ""}</td>
                   <td>${r.pareto_optimal ? `<span class="pill pill-good">✓ pareto</span>` : `<span class="pill">dominated</span>`}</td>
                 </tr>
               `).join("")}
@@ -584,4 +603,5 @@ document.getElementById("btn-refresh-results").addEventListener("click", loadRes
 // boot
 // ============================================================
 gsap.fromTo("[data-animate]", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: "power2.out", delay: 0.1 });
-loadOverview();
+const bootView = window.location.hash.slice(1);
+goTo(views.includes(bootView) ? bootView : "overview");

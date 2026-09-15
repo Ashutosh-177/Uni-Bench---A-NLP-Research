@@ -22,9 +22,15 @@ from scipy import stats
 from .bias_calibration import JudgeCorrection, get_correction
 
 LOWER_IS_BETTER_METRICS = {
-    "cost_usd", "latency_s",
+    "cost_usd", "latency_s", "tokens",
     "response_divergence", "length_asymmetry", "tone_gap",
 }
+
+# Per-item bookkeeping columns: summed into valid-item counts by the report,
+# never compared as metrics. The raw judge score is kept for reference only;
+# the calibrated score is the one that enters the Pareto comparison.
+AUDIT_COLUMNS = ["n_judge_scores", "empty_output", "auto_valid"]
+NON_METRIC_COLUMNS = {"model", "task", "item_id", "avg_judge_score_raw", *AUDIT_COLUMNS}
 
 MIN_ITEMS_FOR_FRIEDMAN = 3
 MIN_MODELS_FOR_FRIEDMAN = 3
@@ -60,15 +66,18 @@ def build_summary_table(raw_results: List[dict],
             corrected_scores.append(correction.apply(jr["score"]))
         row["avg_judge_score_raw"] = float(np.mean(raw_scores)) if raw_scores else np.nan
         row["avg_judge_score"] = float(np.mean(corrected_scores)) if corrected_scores else np.nan
-        row.update(r.get("automatic", {}))
+        row["n_judge_scores"] = float(len(raw_scores))
+        row["empty_output"] = float(any(not (t or "").strip() for t in r.get("outputs", {}).values()))
+        automatic = r.get("automatic", {})
+        row["auto_valid"] = float(bool(automatic) and all(pd.notna(v) for v in automatic.values()))
+        row.update(automatic)
         rows.append(row)
     return pd.DataFrame(rows)
 
 
 def _metric_columns(df_task: pd.DataFrame) -> List[str]:
-    non_metric = {"model", "task", "item_id"}
     numeric_cols = df_task.select_dtypes(include=[np.number]).columns
-    return [c for c in numeric_cols if c not in non_metric and df_task[c].notna().any()]
+    return [c for c in numeric_cols if c not in NON_METRIC_COLUMNS and df_task[c].notna().any()]
 
 
 def pareto_optimal_models(summary_task: pd.DataFrame) -> List[str]:

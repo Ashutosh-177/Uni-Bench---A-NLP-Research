@@ -1,0 +1,67 @@
+# UniBench-NLP configuration.
+#
+# `models`: the fixed pool being compared. `provider` must be one of
+# mock | groq | gemini (see unibench/models/__init__.py PROVIDER_REGISTRY).
+# `model_id` is the provider's raw model identifier -- Groq and Google both
+# rename/deprecate model ids occasionally, so if you get a "model not
+# found" error, check the current list at:
+#   Groq:   https://console.groq.com/docs/models
+#   Gemini: https://ai.google.dev/gemini-api/docs/models
+#
+# Two Groq-hosted open-weight models + one Gemini model gives you 3 models
+# total, which is the minimum needed for the Pareto ranking and Friedman
+# significance test to be meaningful (see unibench/evaluation/aggregator.py).
+
+models:
+  # llama-3.3-70b-versatile was REMOVED from Groq's model list entirely
+  # between the previous run and this one -- confirmed by querying the live
+  # https://api.groq.com/openai/v1/models endpoint, not guessed (it 404'd
+  # with model_not_found on every single call). This is a real, dated
+  # instance of Gap 4 (commercial-API non-reproducibility), reported as an
+  # engineering finding rather than silently patched around. Replaced with
+  # gpt-oss-20b, the remaining unused Groq-hosted chat model, to keep the
+  # pool at 3 models without re-adding a since-retired id.
+  - name: qwen-3.6-27b
+    provider: groq
+    model_id: qwen/qwen3.6-27b
+  - name: gpt-oss-120b
+    provider: groq
+    model_id: openai/gpt-oss-120b
+  - name: gpt-oss-20b
+    provider: groq
+    model_id: openai/gpt-oss-20b
+  # gemini-3.6-flash was REMOVED from this run's pool: its free tier caps at
+  # a hard 20 requests/day per model (confirmed via the live 429 response --
+  # quotaId GenerateRequestsPerDayPerProjectPerModel-FreeTier, quotaValue
+  # 20), which a 16-item x multi-judge run exhausts before finishing. The
+  # gemini backend itself remains implemented and connectivity-tested; it is
+  # simply not viable for a same-day full run on the free tier. Reported as
+  # a quantified instance of Gap 4 (commercial-API non-reproducibility)
+  # rather than silently worked around.
+
+# Which of the models above also act as AI judges (cross-judging every
+# subject model's outputs, including their own -- a known self-preference
+# bias risk `calibrate` helps catch).
+judges:
+  - qwen-3.6-27b
+  - gpt-oss-20b
+  - gpt-oss-120b
+
+# Which tasks (from unibench/tasks/__init__.py TASK_REGISTRY) to run.
+tasks:
+  - fairness
+  - summarization
+
+# max_tokens=800, not 400: reasoning models (e.g. Qwen's thinking mode)
+# spend a large chunk of their budget on hidden <think>...</think> reasoning
+# before the final answer; 400 was verified to leave Qwen's summarization
+# responses truncated mid-thought (empty output on every single item) --
+# 800 gives every model, thinking or not, enough headroom to actually finish.
+run:
+  temperature: 0.0
+  max_tokens: 800
+
+calibration:
+  sample_size: 10
+
+results_dir: results

@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from .evaluation.aggregator import (
-    build_summary_table, pareto_optimal_models, composite_quick_glance_score,
+    AUDIT_COLUMNS, build_summary_table, pareto_optimal_models, composite_quick_glance_score,
     friedman_test,
 )
 from .evaluation.bias_calibration import compute_bias_corrections
@@ -78,8 +78,24 @@ def compute_report_data(results_dir: Path) -> dict:
     judge_names = sorted({jr["judge_name"] for r in raw_results for jr in r.get("judge_records", [])})
 
     long_df = build_summary_table(raw_results, corrections)
+    counts = (long_df.groupby(["model", "task"])
+              .agg(n_items=("item_id", "count"), n_empty_items=("empty_output", "sum"),
+                   n_valid_auto=("auto_valid", "sum"), n_judge_scores=("n_judge_scores", "sum"))
+              .astype(int).reset_index())
     summary = long_df.groupby(["model", "task"]).mean(numeric_only=True).reset_index()
+    summary = summary.drop(columns=AUDIT_COLUMNS)
     summary = summary.sort_values(["task", "model"]).reset_index(drop=True)
+
+    judge_audit: Dict[str, dict] = {}
+    for r in raw_results:
+        for jr in r.get("judge_records", []):
+            entry = judge_audit.setdefault(jr["judge_name"], {"judge": jr["judge_name"], "n_calls": 0,
+                                                              "n_call_failed": 0, "n_unparsed": 0})
+            entry["n_calls"] += 1
+            if jr["score"] is None:
+                # Older raw results lack `call_failed`; ai_judge marks API failures in the reason.
+                failed = jr.get("call_failed", jr["reason"].startswith("(judge call failed"))
+                entry["n_call_failed" if failed else "n_unparsed"] += 1
 
     pareto_flags, composite_vals, friedman_results = [], [], []
     for task in summary["task"].unique():
@@ -94,6 +110,7 @@ def compute_report_data(results_dir: Path) -> dict:
             friedman_results.append(f)
     summary["pareto_optimal"] = pareto_flags
     summary["composite_quick_glance"] = composite_vals
+    summary = summary.merge(counts, on=["model", "task"], how="left")
 
     corrections_json = {
         name: {"method": c.method, "n_points": c.n_points, "detail": c.detail}
@@ -108,6 +125,8 @@ def compute_report_data(results_dir: Path) -> dict:
     return {
         "n_records": len(raw_results),
         "n_errors": sum(1 for r in raw_results if r.get("error")),
+        "n_empty_records": int(long_df["empty_output"].sum()),
+        "judge_audit": list(judge_audit.values()),
         "judge_names": judge_names,
         "corrections": corrections_json,
         "summary": _records(summary),
@@ -158,6 +177,15 @@ def generate_report(results_dir: Path) -> None:
     md = ["# UniBench-NLP Report\n"]
     md.append("## Judge bias calibration\n")
     md.append(_corrections_note(data["corrections"]) or "_No judges found._")
+    md.append("\n\n## Data completeness audit\n")
+    for row in data["summary"]:
+        md.append(f"- **{row['model']}** / {row['task']}: {row['n_items']} items, "
+                  f"{row['n_empty_items']} with an empty response, "
+                  f"{row['n_valid_auto']} with every automatic metric defined, "
+                  f"{row['n_judge_scores']} parsed judge scores")
+    for ja in data["judge_audit"]:
+        md.append(f"- judge **{ja['judge']}**: of {ja['n_calls']} calls, {ja['n_call_failed']} failed at the API "
+                  f"and {ja['n_unparsed']} returned a verdict that could not be parsed")
     md.append("\n\n## Per-task results\n")
     for task in data["tasks"]:
         task_df = summary[summary["task"] == task]

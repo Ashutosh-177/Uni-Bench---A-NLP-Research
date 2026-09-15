@@ -15,6 +15,14 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
+# Shown in place of an empty response so neither judges nor human raters read
+# the next block of text (e.g. the reference answer) as the model's output.
+EMPTY_RESPONSE_MARKER = "(EMPTY RESPONSE: the model returned no text)"
+
+
+def response_or_marker(text: Optional[str]) -> str:
+    return (text or "").strip() or EMPTY_RESPONSE_MARKER
+
 
 @dataclass
 class TaskItem:
@@ -44,14 +52,15 @@ class Task(ABC):
         raise NotImplementedError
 
     def build_judge_context(self, item: TaskItem, outputs: Dict[str, str]) -> str:
-        """Text block shown to the AI judge alongside `self.rubric`. Default
-        implementation dumps every prompt variant next to its model output
-        and the reference answer, if any; override for tasks (e.g. fairness)
-        that need clearer structure."""
-        lines = []
-        for variant, prompt in item.prompts.items():
-            lines.append(f"[{variant}] PROMPT: {prompt}")
-            lines.append(f"[{variant}] MODEL RESPONSE: {outputs.get(variant, '')}")
+        """Text block shown to the AI judge (and to human raters) alongside
+        `self.rubric`. The reference answer, if any, comes before the model
+        response and is labelled as such: placed after an empty response, it
+        was graded as if it were the response. Override for tasks (e.g.
+        fairness) that need clearer structure."""
+        lines = [f"[{variant}] PROMPT: {prompt}" for variant, prompt in item.prompts.items()]
         if item.reference:
-            lines.append(f"REFERENCE ANSWER: {item.reference}")
+            lines.append(f"REFERENCE ANSWER (for comparison only; this is NOT the response being graded): "
+                         f"{item.reference}")
+        for variant in item.prompts:
+            lines.append(f"[{variant}] MODEL RESPONSE TO GRADE: {response_or_marker(outputs.get(variant))}")
         return "\n".join(lines)

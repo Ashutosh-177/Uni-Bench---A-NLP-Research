@@ -4,10 +4,10 @@ __pycache__/
 .venv/
 venv/
 
-# Generated outputs -- reproducible from a run, don't need to be tracked.
-results/*.json
-results/*.csv
-results/*.png
-results/*.html
-results/*.md
-!results/.gitkeep
+# results/ is NOT ignored: it holds the released data for the accompanying
+# paper -- every model output, judge verdict, and human rating behind the
+# reported numbers, plus results/archive/ with the earlier runs. Every figure
+# and statistic in the paper is recomputed from these files by
+# scripts/paper_stats.py, so they are part of the record, not build output.
+# A fresh `run` overwrites results/ in place; commit deliberately or archive
+# first.

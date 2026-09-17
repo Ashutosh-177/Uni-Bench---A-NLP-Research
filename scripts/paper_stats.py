@@ -248,6 +248,39 @@ for t in tasks:
     print(f"{'':14s} Friedman mean ranks (all three): "
           + ", ".join(f"{m}={ranks[m]:.2f}" for m in MODELS))
 
+section("What the corrected pipeline would report (empty outputs never judged)")
+# The framework now refuses to send an output with an empty response to the
+# judges. The reported run predates that change, so its judge means include
+# verdicts on empty outputs. Re-applying the exclusion rule to the STORED
+# verdicts shows what the corrected pipeline would have reported. This is a
+# sensitivity analysis, not a re-run: the verdicts it reuses were issued under
+# the earlier context layout, so only the exclusion rule is being tested.
+for t in tasks:
+    rows, blocks = [], defaultdict(dict)
+    for m in MODELS:
+        recs = [r for r in raw if r["model"] == m and r["task"] == t]
+        kept = []
+        for r in recs:
+            scored = [j["score"] for j in r["judge_records"] if j.get("score") is not None]
+            if not scored:
+                continue
+            mean = float(np.mean(scored))
+            if all((txt or "").strip() for txt in r["outputs"].values()):
+                kept.append(mean)
+                blocks[r["item_id"]][m] = mean
+        rows.append((m, kept))
+    for m, kept in rows:
+        sd = f"{np.std(kept, ddof=1):.2f}" if len(kept) > 1 else "n/a"
+        print(f"{t:14s} {m:14s} judge={np.mean(kept):.2f}+/-{sd} over {len(kept)} answered item(s)")
+    complete = pd.DataFrame(
+        [{"item_id": i, **d} for i, d in blocks.items() if len(d) == len(MODELS)]
+    )
+    if complete.empty:
+        print(f"{'':14s} no complete blocks left")
+        continue
+    friedman_report(complete.set_index("item_id")[MODELS],
+                    f"{t}, corrected pipeline (complete blocks only)")
+
 section("Illustrative paid-tier cost per item and latency ratios")
 for t in tasks:
     means = long_df[long_df["task"] == t].groupby("model")[["tokens", "latency_s"]].mean()

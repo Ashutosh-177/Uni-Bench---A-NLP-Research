@@ -23,7 +23,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from .evaluation.aggregator import (
-    AUDIT_COLUMNS, build_summary_table, pareto_optimal_models, composite_quick_glance_score,
+    AUDIT_COLUMNS, build_summary_table, summarize_per_model, pareto_optimal_models,
+    composite_quick_glance_score,
     friedman_test,
 )
 from .evaluation.bias_calibration import compute_bias_corrections
@@ -82,7 +83,7 @@ def compute_report_data(results_dir: Path) -> dict:
               .agg(n_items=("item_id", "count"), n_empty_items=("empty_output", "sum"),
                    n_valid_auto=("auto_valid", "sum"), n_judge_scores=("n_judge_scores", "sum"))
               .astype(int).reset_index())
-    summary = long_df.groupby(["model", "task"]).mean(numeric_only=True).reset_index()
+    summary = summarize_per_model(long_df)
     summary = summary.drop(columns=AUDIT_COLUMNS)
     summary = summary.sort_values(["task", "model"]).reset_index(drop=True)
 

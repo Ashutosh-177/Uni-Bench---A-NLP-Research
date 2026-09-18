@@ -24,12 +24,23 @@ from .bias_calibration import JudgeCorrection, get_correction
 LOWER_IS_BETTER_METRICS = {
     "cost_usd", "latency_s", "tokens",
     "response_divergence", "length_asymmetry", "tone_gap",
+    # Reliability is a ranking criterion, not bookkeeping. Averaged over a
+    # model's items this is its empty-response rate, and without it a model
+    # that fails to answer can be dominant on the items it did answer.
+    "empty_output",
 }
 
-# Per-item bookkeeping columns: summed into valid-item counts by the report,
-# never compared as metrics. The raw judge score is kept for reference only;
-# the calibrated score is the one that enters the Pareto comparison.
-AUDIT_COLUMNS = ["n_judge_scores", "empty_output", "auto_valid"]
+# A quality metric averaged over a model's valid items only is not comparable
+# with the same metric averaged over every item of a rival: the failed items
+# are missing precisely because the model failed. Below this fraction of
+# items the mean is withheld (set to NaN) rather than reported, and a
+# withheld metric loses its Pareto comparison -- see pareto_optimal_models.
+MIN_METRIC_COVERAGE = 0.8
+
+# Per-item bookkeeping columns, never compared as metrics. `empty_output` is
+# deliberately NOT here any more; it is a metric (see above). The raw judge
+# score is kept for reference only; the calibrated score enters the comparison.
+AUDIT_COLUMNS = ["n_judge_scores", "auto_valid"]
 NON_METRIC_COLUMNS = {"model", "task", "item_id", "avg_judge_score_raw", *AUDIT_COLUMNS}
 
 MIN_ITEMS_FOR_FRIEDMAN = 3
@@ -80,10 +91,54 @@ def _metric_columns(df_task: pd.DataFrame) -> List[str]:
     return [c for c in numeric_cols if c not in NON_METRIC_COLUMNS and df_task[c].notna().any()]
 
 
-def pareto_optimal_models(summary_task: pd.DataFrame) -> List[str]:
+def summarize_per_model(long_df: pd.DataFrame,
+                         min_coverage: float = MIN_METRIC_COVERAGE) -> pd.DataFrame:
+    """Per-(model, task) means, with every metric mean withheld when it rests
+    on too few of that model's items.
+
+    Taking the mean of whatever happens to be present silently changes the
+    question a metric answers: qwen-3.6-27b's fairness tone-word gap of 0.00
+    was the mean over the 5 of 10 pairs it answered, and it beat rivals whose
+    0.20 and 0.30 covered all 10. Withholding the mean below `min_coverage`
+    keeps a partial average from being compared against a complete one; the
+    Pareto comparison then treats the withheld value as the worse side.
+    `empty_output` is exempt because its whole purpose is to count the
+    failures, and the item count columns are exempt because they are counts.
+    """
+    summary = long_df.groupby(["model", "task"]).mean(numeric_only=True).reset_index()
+    counts = long_df.groupby(["model", "task"]).size().rename("n_items")
+    exempt = {"empty_output", *AUDIT_COLUMNS}
+    metric_cols = [c for c in summary.select_dtypes(include=[np.number]).columns
+                   if c not in NON_METRIC_COLUMNS and c not in exempt]
+    for col in metric_cols:
+        present = long_df.groupby(["model", "task"])[col].count()
+        coverage = (present / counts).reindex(
+            summary.set_index(["model", "task"]).index).to_numpy()
+        summary.loc[coverage < min_coverage, col] = np.nan
+    return summary
+
+
+def pareto_optimal_models(summary_task: pd.DataFrame,
+                           skip_missing: bool = False) -> List[str]:
     """summary_task: one row per model (already averaged over items) for a
     SINGLE task. Returns the list of model names on the Pareto frontier
-    (no other model beats them on every relevant metric at once)."""
+    (no other model beats them on every relevant metric at once).
+
+    Missing values are NOT free. An earlier version skipped any metric where
+    either model was NaN, which let a model that failed to produce measurable
+    output win the comparison twice over: it was judged on fewer criteria
+    than its rivals, and the criteria it was judged on were averaged over
+    only the items it happened to complete. In the accompanying paper that
+    put qwen-3.6-27b on the fairness frontier on the strength of a tone-word
+    gap of 0.00 computed over the 5 of 10 pairs it answered, against 0.20 and
+    0.30 computed over all 10 -- the model was rewarded for the items it
+    failed. A metric a model could not produce is therefore treated as worse
+    than any value a rival did produce, which is what "this model did not
+    give us a number here" actually means for someone choosing between them.
+
+    Pass skip_missing=True to reproduce the old ignore-NaN behavior for a
+    sensitivity analysis; it is never the default.
+    """
     metric_cols = _metric_columns(summary_task)
     if not metric_cols:
         return list(summary_task["model"])
@@ -98,7 +153,18 @@ def pareto_optimal_models(summary_task: pd.DataFrame) -> List[str]:
             strictly_better_somewhere = False
             for col in metric_cols:
                 vi, vj = row_i[col], row_j[col]
-                if pd.isna(vi) or pd.isna(vj):
+                mi, mj = pd.isna(vi), pd.isna(vj)
+                if mi and mj:
+                    continue
+                if mi or mj:
+                    if skip_missing:
+                        continue
+                    # Whichever side has no value is the worse side here.
+                    if mi:
+                        strictly_better_somewhere = True
+                    else:
+                        at_least_as_good_everywhere = False
+                        break
                     continue
                 lower_better = col in LOWER_IS_BETTER_METRICS
                 j_better = (vj < vi) if lower_better else (vj > vi)

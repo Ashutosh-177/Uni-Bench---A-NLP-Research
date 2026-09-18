@@ -8,6 +8,7 @@
       <th>tokens</th>
       <th>avg_judge_score_raw</th>
       <th>avg_judge_score</th>
+      <th>empty_output</th>
       <th>response_divergence</th>
       <th>length_asymmetry</th>
       <th>tone_gap</th>
@@ -31,14 +32,15 @@
       <td>423.5</td>
       <td>8.825000</td>
       <td>8.825000</td>
+      <td>0.000000</td>
       <td>0.394220</td>
-      <td>0.116840</td>
+      <td>0.11684</td>
       <td>0.3</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>True</td>
-      <td>0.633367</td>
+      <td>0.679196</td>
       <td>10</td>
       <td>0</td>
       <td>10</td>
@@ -52,14 +54,15 @@
       <td>536.2</td>
       <td>9.075000</td>
       <td>9.075000</td>
+      <td>0.000000</td>
       <td>0.394582</td>
-      <td>0.063960</td>
+      <td>0.06396</td>
       <td>0.2</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>True</td>
-      <td>0.810013</td>
+      <td>0.794688</td>
       <td>10</td>
       <td>0</td>
       <td>10</td>
@@ -73,14 +76,15 @@
       <td>1214.4</td>
       <td>4.631667</td>
       <td>4.631667</td>
-      <td>0.411664</td>
-      <td>0.092287</td>
-      <td>0.0</td>
+      <td>0.500000</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>True</td>
-      <td>0.280616</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>0.100000</td>
       <td>10</td>
       <td>5</td>
       <td>5</td>
@@ -94,6 +98,7 @@
       <td>301.0</td>
       <td>9.966667</td>
       <td>9.966667</td>
+      <td>0.000000</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -101,7 +106,7 @@
       <td>0.219275</td>
       <td>0.430507</td>
       <td>True</td>
-      <td>0.918701</td>
+      <td>0.928863</td>
       <td>6</td>
       <td>0</td>
       <td>6</td>
@@ -115,6 +120,7 @@
       <td>341.5</td>
       <td>9.225000</td>
       <td>9.225000</td>
+      <td>0.000000</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -122,7 +128,7 @@
       <td>0.196632</td>
       <td>0.388336</td>
       <td>True</td>
-      <td>0.482306</td>
+      <td>0.527876</td>
       <td>6</td>
       <td>0</td>
       <td>6</td>
@@ -136,14 +142,15 @@
       <td>875.5</td>
       <td>6.375000</td>
       <td>6.375000</td>
+      <td>0.333333</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>0.465480</td>
-      <td>0.206555</td>
-      <td>0.429482</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>False</td>
-      <td>0.273420</td>
+      <td>0.100000</td>
       <td>6</td>
       <td>2</td>
       <td>4</td>
@@ -176,21 +183,21 @@
 
 ### Task: fairness
 
-| model        |   cost_usd |   latency_s |   tokens |   avg_judge_score_raw |   avg_judge_score |   response_divergence |   length_asymmetry |   tone_gap |   rouge1_f |   rouge2_f |   rougeL_f | pareto_optimal   |   composite_quick_glance |   n_items |   n_empty_items |   n_valid_auto |   n_judge_scores |
-|:-------------|-----------:|------------:|---------:|----------------------:|------------------:|----------------------:|-------------------:|-----------:|-----------:|-----------:|-----------:|:-----------------|-------------------------:|----------:|----------------:|---------------:|-----------------:|
-| gpt-oss-120b |          0 |     2.9893  |    423.5 |               8.825   |           8.825   |              0.39422  |          0.11684   |        0.3 |        nan |        nan |        nan | True             |                 0.633367 |        10 |               0 |             10 |               26 |
-| gpt-oss-20b  |          0 |     2.53458 |    536.2 |               9.075   |           9.075   |              0.394582 |          0.0639598 |        0.2 |        nan |        nan |        nan | True             |                 0.810013 |        10 |               0 |             10 |               24 |
-| qwen-3.6-27b |          0 |    47.2502  |   1214.4 |               4.63167 |           4.63167 |              0.411664 |          0.0922872 |        0   |        nan |        nan |        nan | True             |                 0.280616 |        10 |               5 |              5 |               19 |
+| model        |   cost_usd |   latency_s |   tokens |   avg_judge_score_raw |   avg_judge_score |   empty_output |   response_divergence |   length_asymmetry |   tone_gap |   rouge1_f |   rouge2_f |   rougeL_f | pareto_optimal   |   composite_quick_glance |   n_items |   n_empty_items |   n_valid_auto |   n_judge_scores |
+|:-------------|-----------:|------------:|---------:|----------------------:|------------------:|---------------:|----------------------:|-------------------:|-----------:|-----------:|-----------:|-----------:|:-----------------|-------------------------:|----------:|----------------:|---------------:|-----------------:|
+| gpt-oss-120b |          0 |     2.9893  |    423.5 |               8.825   |           8.825   |            0   |              0.39422  |          0.11684   |        0.3 |        nan |        nan |        nan | True             |                 0.679196 |        10 |               0 |             10 |               26 |
+| gpt-oss-20b  |          0 |     2.53458 |    536.2 |               9.075   |           9.075   |            0   |              0.394582 |          0.0639598 |        0.2 |        nan |        nan |        nan | True             |                 0.794688 |        10 |               0 |             10 |               24 |
+| qwen-3.6-27b |          0 |    47.2502  |   1214.4 |               4.63167 |           4.63167 |            0.5 |            nan        |        nan         |      nan   |        nan |        nan |        nan | False            |                 0.1      |        10 |               5 |              5 |               19 |
 
-**Pareto-optimal model(s) for `fairness`:** gpt-oss-120b, gpt-oss-20b, qwen-3.6-27b
+**Pareto-optimal model(s) for `fairness`:** gpt-oss-120b, gpt-oss-20b
 
 ### Task: summarization
 
-| model        |   cost_usd |   latency_s |   tokens |   avg_judge_score_raw |   avg_judge_score |   response_divergence |   length_asymmetry |   tone_gap |   rouge1_f |   rouge2_f |   rougeL_f | pareto_optimal   |   composite_quick_glance |   n_items |   n_empty_items |   n_valid_auto |   n_judge_scores |
-|:-------------|-----------:|------------:|---------:|----------------------:|------------------:|----------------------:|-------------------:|-----------:|-----------:|-----------:|-----------:|:-----------------|-------------------------:|----------:|----------------:|---------------:|-----------------:|
-| gpt-oss-120b |          0 |     1.7676  |    301   |               9.96667 |           9.96667 |                   nan |                nan |        nan |   0.498653 |   0.219275 |   0.430507 | True             |                 0.918701 |         6 |               0 |              6 |               13 |
-| gpt-oss-20b  |          0 |     1.16039 |    341.5 |               9.225   |           9.225   |                   nan |                nan |        nan |   0.470559 |   0.196632 |   0.388336 | True             |                 0.482306 |         6 |               0 |              6 |               15 |
-| qwen-3.6-27b |          0 |     9.94872 |    875.5 |               6.375   |           6.375   |                   nan |                nan |        nan |   0.46548  |   0.206555 |   0.429482 | False            |                 0.27342  |         6 |               2 |              4 |               11 |
+| model        |   cost_usd |   latency_s |   tokens |   avg_judge_score_raw |   avg_judge_score |   empty_output |   response_divergence |   length_asymmetry |   tone_gap |   rouge1_f |   rouge2_f |   rougeL_f | pareto_optimal   |   composite_quick_glance |   n_items |   n_empty_items |   n_valid_auto |   n_judge_scores |
+|:-------------|-----------:|------------:|---------:|----------------------:|------------------:|---------------:|----------------------:|-------------------:|-----------:|-----------:|-----------:|-----------:|:-----------------|-------------------------:|----------:|----------------:|---------------:|-----------------:|
+| gpt-oss-120b |          0 |     1.7676  |    301   |               9.96667 |           9.96667 |       0        |                   nan |                nan |        nan |   0.498653 |   0.219275 |   0.430507 | True             |                 0.928863 |         6 |               0 |              6 |               13 |
+| gpt-oss-20b  |          0 |     1.16039 |    341.5 |               9.225   |           9.225   |       0        |                   nan |                nan |        nan |   0.470559 |   0.196632 |   0.388336 | True             |                 0.527876 |         6 |               0 |              6 |               15 |
+| qwen-3.6-27b |          0 |     9.94872 |    875.5 |               6.375   |           6.375   |       0.333333 |                   nan |                nan |        nan | nan        | nan        | nan        | False            |                 0.1      |         6 |               2 |              4 |               11 |
 
 **Pareto-optimal model(s) for `summarization`:** gpt-oss-120b, gpt-oss-20b
 

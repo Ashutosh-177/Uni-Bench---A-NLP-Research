@@ -1,12 +1,14 @@
 from .base import ModelClient, ModelResponse
 from .mock_client import MockClient
 from .groq_client import GroqClient
+from .anthropic_client import AnthropicClient
 from .gemini_client import GeminiClient
 
 PROVIDER_REGISTRY = {
     "mock": MockClient,
     "groq": GroqClient,
     "gemini": GeminiClient,
+    "anthropic": AnthropicClient,
 }
 
 

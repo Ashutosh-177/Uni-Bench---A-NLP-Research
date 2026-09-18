@@ -8813,5 +8813,75 @@
     "judging_skipped": false,
     "unparsed_judges": [],
     "avg_judge_score": 8.0
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_green_revolution",
+    "outputs": {
+      "default": "The Green Revolution, a term coined by USAID administrator William S. Gaud in 1968, was an agricultural transformation driven by the development of high-yielding crop varieties, expanded irrigation, and modernized management techniques. Key figures such as Norman Borlaug and Yuan Longping, supported by the Ford and Rockefeller Foundations, pioneered these methods in Mexico to combat global hunger. This initiative is credited with saving over a billion people from starvation, eradicating widespread poverty, and reducing agricultural land use, while later incorporating genetic modification to sustain yield improvements."
+    },
+    "automatic": {
+      "rouge1_f": 0.3658536585365854,
+      "rouge2_f": 0.03703703703703704,
+      "rougeL_f": 0.1829268292682927
+    },
+    "judge_records": [
+      {
+        "judge_name": "gpt-oss-safeguard-20b",
+        "score": 8.0,
+        "reason": "Accurately summarizes main points and key figures, though omits some details like mechanization, conditional loans, and broader environmental impacts.",
+        "call_failed": false
+      },
+      {
+        "judge_name": "gpt-oss-20b",
+        "score": 7.0,
+        "reason": "Captures main subject and many key facts but omits several important details such as pesticides, synthetic fertilizers, mechanization, policy\u2011linked loans, and environmental and health impacts.",
+        "call_failed": false
+      }
+    ],
+    "cost_usd": 0.0,
+    "latency_s": 1.014522900004522,
+    "tokens": 547,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": [],
+    "avg_judge_score": 7.5
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_green_revolution",
+    "outputs": {
+      "default": "The Green Revolution, initiated in Mexico, was a major agricultural movement that aimed to combat world hunger and poverty. Led by figures like Norman Borlaug and Yuan Longping, it involved the development of high-yielding crop varieties, expansion of irrigation systems, and distribution of fertilizers, pesticides, and hybrid seeds to farmers. The revolution led to increased crop production, poverty eradication, reduced hunger, higher incomes, and improved infant mortality rates. The term \"Green Revolution\" was coined by William S. Gaud in 1968, describing it as a peaceful alternative to political revolutions. "
+    },
+    "automatic": {
+      "rouge1_f": 0.35928143712574845,
+      "rouge2_f": 0.08484848484848485,
+      "rougeL_f": 0.21556886227544908
+    },
+    "judge_records": [
+      {
+        "judge_name": "gpt-oss-safeguard-20b",
+        "score": 8.0,
+        "reason": "Captures main themes and key facts accurately but omits some secondary details such as foundation involvement and later genetic modifications.",
+        "call_failed": false
+      },
+      {
+        "judge_name": "gpt-oss-20b",
+        "score": 9.0,
+        "reason": "Accurately captures the main subject and key facts without adding extraneous details.",
+        "call_failed": false
+      }
+    ],
+    "cost_usd": 0.0,
+    "latency_s": 0.9086693999997806,
+    "tokens": 587,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": [],
+    "avg_judge_score": 8.5
   }
 ]

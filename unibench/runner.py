@@ -6,8 +6,14 @@ exists) so `run` never needs to know whether calibration has happened yet.
 
 Saves results/raw_results.json after EVERY item (not just at the end) so a
 crash, rate limit, or Ctrl-C partway through a run doesn't lose the API
-calls already paid for -- rerunning `run` simply overwrites with a fuller
-file next time.
+calls already paid for.
+
+With `resume=True` an existing raw_results.json is loaded first and any
+(model, task, item) already in it is skipped. Overwriting instead would mean
+re-paying for every completed record to recover the missing ones, which on a
+billed provider is the difference between finishing a run and starting it
+again -- and the failures that interrupt a run (a per-minute judge quota, a
+retired model id) are exactly the ones this project keeps hitting.
 """
 
 from __future__ import annotations
@@ -30,7 +36,8 @@ def _save(raw_results: List[dict], path: Path) -> None:
 def run_benchmark(models: List[ModelClient], tasks: List[Task], judges: List[ModelClient],
                    results_dir: Path, temperature: float = 0.0, max_tokens: int = 400,
                    verbose: bool = True,
-                   on_progress: Optional[Callable[[dict], None]] = None) -> List[dict]:
+                   on_progress: Optional[Callable[[dict], None]] = None,
+                   resume: bool = False) -> List[dict]:
     """`on_progress`, if given, is called once per (task, item, model) record
     right after it's scored, with a small JSON-serializable event dict --
     this is the hook the web UI's live progress view polls through
@@ -39,12 +46,27 @@ def run_benchmark(models: List[ModelClient], tasks: List[Task], judges: List[Mod
     results_dir = Path(results_dir)
     raw_results_path = results_dir / "raw_results.json"
     raw_results: List[dict] = []
+    done: set = set()
+    if resume and raw_results_path.exists():
+        previous = json.loads(raw_results_path.read_text(encoding="utf-8"))
+        # A record that failed at the API is not "done". Keeping it would make
+        # resume paper over exactly the outages it exists to recover from --
+        # a DNS blip or a provider connection error would be frozen into the
+        # results as an empty output and scored as a model failure.
+        raw_results = [r for r in previous if not r.get("error")]
+        done = {(r["model"], r["task"], r["item_id"]) for r in raw_results}
+        retrying = len(previous) - len(raw_results)
+        if verbose:
+            print(f"resuming: {len(done)} records complete, skipping those"
+                  + (f"; {retrying} errored records will be retried" if retrying else ""))
 
     with TelemetryLogger(results_dir / "run_log.csv") as telemetry:
         for task in tasks:
             items = task.get_items()
             for item in items:
                 for model in models:
+                    if (model.name, task.name, item.id) in done:
+                        continue
                     outputs = {}
                     prompt_tokens = completion_tokens = 0
                     latency = cost = 0.0
@@ -78,7 +100,7 @@ def run_benchmark(models: List[ModelClient], tasks: List[Task], judges: List[Mod
                     # empty response as unfair treatment, and graded the reference answer
                     # in place of an empty summary. The audit counts them instead.
                     judge_records = []
-                    if not had_error and not empty_variants:
+                    if not had_error and not empty_variants and task.needs_judge:
                         for judge in judges:
                             result = judge_item(judge, task, item, outputs)
                             telemetry.log(

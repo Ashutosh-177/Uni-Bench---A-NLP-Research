@@ -37,6 +37,13 @@ class Task(ABC):
     category: str
     rubric: str  # instructions handed to the AI-judge panel for this task
 
+    # Whether this task's outputs need a model judge. A task scored against an
+    # objective key -- multiple choice, exact match -- already has ground truth,
+    # so asking a panel to grade it adds cost, latency and judge noise while
+    # measuring nothing the key does not already say. Tasks whose quality is a
+    # matter of degree (a summary, a free-text answer) leave this True.
+    needs_judge: bool = True
+
     @abstractmethod
     def get_items(self) -> List[TaskItem]:
         """Return the (small, curated) evaluation set for this task."""

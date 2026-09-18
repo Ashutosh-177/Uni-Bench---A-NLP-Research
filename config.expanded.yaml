@@ -1,0 +1,80 @@
+# Expanded pool: 8 models, 2 providers, 4 model families.
+#
+# The reported run in the paper used 3 models from 1 provider, 2 of them the
+# same family at two sizes. That is the weakness every reviewer led with. This
+# pool answers it: GPT-OSS (three sizes, including the safety-tuned variant),
+# Qwen, ALLaM, and Claude (three tiers), served by Groq and Anthropic.
+#
+# Deliberately NOT included: groq/compound and groq/compound-mini. They are
+# agentic systems with tool access rather than plain chat models, so putting
+# them in an English summarization benchmark to reach a round number would pad
+# the pool with entries that are not comparable to the rest.
+#
+# Cost: the Groq models are free-tier. The three Claude models are billed and
+# are the only real spend -- roughly $0.33 for one pass over all 80 items.
+# BBQ needs no judge (needs_judge = False, scored against its own key), so only
+# the 30 summarization items are judged.
+
+models:
+  # --- Groq, free tier ---
+  - name: gpt-oss-120b
+    provider: groq
+    model_id: openai/gpt-oss-120b
+  - name: gpt-oss-20b
+    provider: groq
+    model_id: openai/gpt-oss-20b
+  - name: gpt-oss-safeguard-20b
+    provider: groq
+    model_id: openai/gpt-oss-safeguard-20b
+  # qwen3.6-27b, the model the paper reports on, was RETIRED from Groq
+  # mid-project and now 404s. 3.8 is its replacement; results from the two are
+  # not comparable, which is the point of Finding 4.
+  - name: qwen-3.8-27b
+    provider: groq
+    model_id: qwen/qwen3.8-27b
+  # Arabic-focused and much smaller than the rest. Kept because a pool of
+  # near-identical models cannot show a framework separating anything, but its
+  # English scores should be read with its design in mind.
+  - name: allam-2-7b
+    provider: groq
+    model_id: allam-2-7b
+
+  # --- Anthropic, billed ---
+  - name: claude-haiku-4-5
+    provider: anthropic
+    model_id: claude-haiku-4-5
+  - name: claude-sonnet-5
+    provider: anthropic
+    model_id: claude-sonnet-5
+  - name: claude-opus-5
+    provider: anthropic
+    model_id: claude-opus-5
+
+# Free-tier Groq models, so the panel costs nothing and can score every output.
+# The independent judge is added afterwards with scripts/external_judge.py, so
+# that it stays outside the pool it is checking.
+# gpt-oss-20b was dropped from the panel mid-run: as a JUDGE it hit a sustained
+# free-tier limit and every call burned the full retry ladder, 260-556s each
+# against gpt-oss-120b's 2.5s, which would have taken ~13 hours to finish. It
+# remains a SUBJECT model. This is Finding 7 on a new pool -- a free-tier quota
+# that stops a model serving as a judge while it answers fine as a subject --
+# and gpt-oss-safeguard-20b replaces it so the panel still has two members.
+judges:
+  - gpt-oss-120b
+  - gpt-oss-safeguard-20b
+
+tasks:
+  - bbq_bias
+  - wikipedia_summarization
+
+# 800 tokens: Findings 2, 3 and 5 are all one failure -- a reasoning pass
+# consuming a shared output budget until no visible answer is left. 800 was
+# verified sufficient for the reasoning models in the original pool.
+run:
+  temperature: 0.0
+  max_tokens: 800
+
+calibration:
+  sample_size: 60
+
+results_dir: results_expanded

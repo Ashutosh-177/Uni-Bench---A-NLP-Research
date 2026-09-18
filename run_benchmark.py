@@ -61,6 +61,7 @@ def cmd_run(args: argparse.Namespace) -> None:
         results_dir=results_dir,
         temperature=run_cfg.get("temperature", 0.0),
         max_tokens=run_cfg.get("max_tokens", 400),
+        resume=getattr(args, "resume", False),
     )
     print(f"\nDone. Raw results in {results_dir/'raw_results.json'}")
 
@@ -87,8 +88,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="UniBench-NLP: cross-domain, bias-corrected LLM benchmarking.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    subparsers.add_parser("run", parents=[config_parent],
-                           help="Run every configured model on every configured task.")
+    run_parser = subparsers.add_parser(
+        "run", parents=[config_parent],
+        help="Run every configured model on every configured task.")
+    run_parser.add_argument(
+        "--resume", action="store_true",
+        help="Keep the records already in raw_results.json and only run what is "
+             "missing. Use after a run is interrupted -- without it the file is "
+             "rebuilt from scratch and every completed call is paid for twice.")
 
     calibrate_parser = subparsers.add_parser("calibrate", parents=[config_parent],
                                               help="Blind human rating of the outputs, for judge bias correction.")

@@ -59,9 +59,15 @@ models:
 # remains a SUBJECT model. This is Finding 7 on a new pool -- a free-tier quota
 # that stops a model serving as a judge while it answers fine as a subject --
 # and gpt-oss-safeguard-20b replaces it so the panel still has two members.
-judges:
-  - gpt-oss-120b
-  - gpt-oss-safeguard-20b
+# Judging is run SEPARATELY from generation for this pool, via scripts/rejudge.py.
+# Three different Groq models hit a sustained judge-role rate limit during this
+# run -- qwen-3.6-27b in the original study, then gpt-oss-20b, then gpt-oss-120b,
+# each degrading to 400-670s per call while answering fine as a subject. Judging
+# inside the generation loop means one throttled judge stalls the whole run, and
+# swapping judges midway leaves records judged by different panels. Generating
+# first and judging afterwards keeps the panel uniform across every record and
+# lets judging resume whenever quota allows.
+judges: []
 
 tasks:
   - bbq_bias

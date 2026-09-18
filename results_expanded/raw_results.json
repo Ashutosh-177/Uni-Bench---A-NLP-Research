@@ -12763,5 +12763,2178 @@
     "empty_outputs": [],
     "judging_skipped": false,
     "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_compound_interest",
+    "outputs": {
+      "default": "Compound interest differs from simple interest by adding accumulated interest to the principal, with its growth determined by the interest rate and the frequency of compounding. To facilitate fair comparisons between financial products, institutions often disclose an annual equivalent rate, such as the effective annual percentage rate, which reflects the total accumulated interest over a year. Practical applications vary by financial instrument; for instance, corporate and government bonds typically pay interest semi-annually, while Canadian mortgages are compounded semi-annually, unlike U.S. mortgages which utilize amortizing schedules that do not add interest to the principal."
+    },
+    "automatic": {
+      "rouge1_f": 0.22556390977443608,
+      "rouge2_f": 0.030534351145038167,
+      "rougeL_f": 0.16541353383458646
+    },
+    "judge_records": [
+      {
+        "judge_name": "gpt-oss-120b",
+        "score": 9.0,
+        "reason": "Accurately captures the main points and key facts without adding extraneous details, though omits some frequency examples.",
+        "call_failed": false
+      },
+      {
+        "judge_name": "gpt-oss-safeguard-20b",
+        "score": 9.0,
+        "reason": "Comprehensive and accurate summary that captures key points without omissions or extraneous details.",
+        "call_failed": false
+      }
+    ],
+    "cost_usd": 0.0,
+    "latency_s": 6.470402999999351,
+    "tokens": 534,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_compound_interest",
+    "outputs": {
+      "default": "Compound interest is different from simple interest, as it includes the accumulation of previously earned interest. In compounding frequency, interest is capitalized multiple times, such as yearly, half-yearly, or monthly. To compare financial products, annual equivalent rates are used, like the effective annual rate, which considers interest accumulation and other charges. Examples include corporate and government bonds, where interest is paid twice yearly, and Canadian mortgage loans compounded semi-annually with regular payments. "
+    },
+    "automatic": {
+      "rouge1_f": 0.3243243243243243,
+      "rouge2_f": 0.09174311926605504,
+      "rougeL_f": 0.21621621621621623
+    },
+    "judge_records": [
+      {
+        "judge_name": "gpt-oss-120b",
+        "score": 8.0,
+        "reason": "Accurately captures the main points and key examples, but omits several details like US mortgage handling and additional naming conventions for annual rates.",
+        "call_failed": false
+      },
+      {
+        "judge_name": "gpt-oss-safeguard-20b",
+        "score": 8.0,
+        "reason": "Captures main concepts and examples, but omits some details such as U.S. mortgage structure and precise definition of annual equivalent rate.",
+        "call_failed": false
+      }
+    ],
+    "cost_usd": 0.0,
+    "latency_s": 1.1015136999922106,
+    "tokens": 540,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_compound_interest",
+    "outputs": {
+      "default": "Compound interest accumulates when previously earned interest is added to the principal and earns interest itself, with the frequency of compounding (daily, monthly, annually, etc.) affecting the total amount earned. To help consumers compare financial products, many countries require institutions to disclose the annual equivalent rate (AER) or effective annual rate, which represents the total interest accumulated over one year. Examples include corporate and government bonds that typically compound semi-annually, and Canadian mortgages that compound semi-annually with monthly payments, whereas U.S. mortgages use amortization schedules that do not compound interest."
+    },
+    "automatic": {
+      "rouge1_f": 0.24615384615384617,
+      "rouge2_f": 0.04687500000000001,
+      "rougeL_f": 0.16923076923076927
+    },
+    "judge_records": [
+      {
+        "judge_name": "gpt-oss-120b",
+        "score": 9.0,
+        "reason": "Accurately covers definition, compounding frequency, annual equivalent rate, and key examples without adding extraneous info.",
+        "call_failed": false
+      },
+      {
+        "judge_name": "gpt-oss-safeguard-20b",
+        "score": 8.0,
+        "reason": "Accurate summary but omits some frequency options and terminology details.",
+        "call_failed": false
+      }
+    ],
+    "cost_usd": 0.0010760000000000001,
+    "latency_s": 4.1803970000037225,
+    "tokens": 564,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_compound_interest",
+    "outputs": {
+      "default": "Compound interest, unlike simple interest, adds accumulated interest back to the principal, with its total effect depending on both the interest rate and compounding frequency (yearly, monthly, daily, etc.). To help consumers compare financial products, many countries mandate disclosure of an annual equivalent rate (variously called EAPR, AER, or annual percentage yield), reflecting total accumulated interest plus fees over a year. Examples include bonds, which typically pay interest semi-annually resulting in a higher effective annual rate than the stated rate, and mortgages, where Canadian loans compound semi-annually while U.S. mortgages use amortization schedules rather than true compound interest."
+    },
+    "automatic": {
+      "rouge1_f": 0.23188405797101447,
+      "rouge2_f": 0.029411764705882353,
+      "rougeL_f": 0.14492753623188406
+    },
+    "judge_records": [
+      {
+        "judge_name": "gpt-oss-120b",
+        "score": 9.0,
+        "reason": "Accurately captures the main points about compound interest, compounding frequency, annual equivalent rates, and examples without adding unsupported details.",
+        "call_failed": false
+      },
+      {
+        "judge_name": "gpt-oss-safeguard-20b",
+        "score": 9.0,
+        "reason": "Accurately captures the core concepts and examples while omitting only minor details.",
+        "call_failed": false
+      }
+    ],
+    "cost_usd": 0.0035680000000000004,
+    "latency_s": 4.6962674999958836,
+    "tokens": 892,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_compound_interest",
+    "outputs": {
+      "default": "Compound interest differs from simple interest in that accumulated interest is added to the principal, with the total depending on both the interest rate and the compounding frequency\u2014which may be annual, semi-annual, quarterly, monthly, weekly, daily, continuous, or only at maturity. To allow consumers to compare financial products, many countries require institutions to disclose an annualized compound rate, known variously as the effective annual rate, annual equivalent rate, or annual percentage yield, calculated as the total interest accrued over one year divided by the principal and often including fees and taxes. In practice, corporate and government bonds typically pay interest twice yearly, making the effective yearly rate higher than the stated rate, and Canadian mortgages generally compound semi-annually. U.S. mortgages, by contrast, are amortizing loans in which interest is not added to the principal but applied according to an amortization schedule."
+    },
+    "automatic": {
+      "rouge1_f": 0.18681318681318682,
+      "rouge2_f": 0.03333333333333333,
+      "rougeL_f": 0.12087912087912088
+    },
+    "judge_records": [],
+    "cost_usd": 0.010545,
+    "latency_s": 7.77762399999483,
+    "tokens": 957,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_urban_heat_island",
+    "outputs": {
+      "default": "Urban heat islands (UHIs) are areas where cities are warmer than surrounding rural regions due to heat\u2011trapping land use, dense building materials, reduced ventilation, and limited greenery. This excess heat lengthens growing seasons, worsens air and water quality, and can increase downwind rainfall, while climate\u2011driven heat waves amplify the effect. Mitigation strategies include expanding tree cover, green roofs, lighter surfaces, ventilation corridors, and passive radiative cooling. The intensity of UHIs varies with local climate, urban density, and design."
+    },
+    "automatic": {
+      "rouge1_f": 0.2731277533039648,
+      "rouge2_f": 0.044444444444444446,
+      "rougeL_f": 0.1497797356828194
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 314.21106750000035,
+    "tokens": 612,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_urban_heat_island",
+    "outputs": {
+      "default": "Urban heat islands (UHIs) occur when cities are warmer than surrounding rural areas due to heat trapping from built environments, reduced vegetation, and human activity, leading to longer growing seasons, poorer air and water quality, and stressed ecosystems. Mitigation strategies include increasing tree cover, green roofs, lighter-colored surfaces, and ventilation corridors to promote shade and evaporative cooling. While climate change does not cause UHIs, it intensifies heat waves that amplify the effect, and the severity of an UHI depends on local climate, urban design, and density."
+    },
+    "automatic": {
+      "rouge1_f": 0.29914529914529914,
+      "rouge2_f": 0.05172413793103448,
+      "rougeL_f": 0.15384615384615385
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.404618800006574,
+    "tokens": 636,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_urban_heat_island",
+    "outputs": {
+      "default": "Urban heat islands arise when cities are warmer than surrounding rural areas because of heat\u2011trapping built surfaces, limited greenery, and direct human emissions. The excess heat can extend growing seasons, worsen air and water quality, increase downwind rainfall, and amplify heat waves, particularly in compact, dense urban settings. Mitigation strategies\u2014such as tree cover, green roofs, lighter\u2011colored surfaces, and improved ventilation\u2014promote shade and evaporative cooling, helping to reduce the temperature differential."
+    },
+    "automatic": {
+      "rouge1_f": 0.27149321266968324,
+      "rouge2_f": 0.0547945205479452,
+      "rougeL_f": 0.16289592760181
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.0324903000000631,
+    "tokens": 787,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_urban_heat_island",
+    "outputs": {
+      "default": "The urban heat island effect is defined as the relative warmth of cities compared to surrounding rural areas, driven by factors such as heat-absorbing materials, reduced greenery, and human-generated emissions. This phenomenon leads to increased monthly rainfall downwind, longer growing seasons, and degraded air and water quality, though its intensity varies significantly based on local climate and environment. Mitigation strategies include increasing tree cover, implementing green roofs, and using lighter-colored, less absorptive building materials to reflect sunlight. While distinct from climate change, the urban heat island effect is amplified by more frequent and intense heat waves associated with global warming."
+    },
+    "automatic": {
+      "rouge1_f": 0.312,
+      "rouge2_f": 0.06451612903225806,
+      "rougeL_f": 0.152
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.016791899994132,
+    "tokens": 534,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_urban_heat_island",
+    "outputs": {
+      "default": "Urban heat islands occur when cities experience higher temperatures compared to surrounding rural areas due to factors like heat-trapping land use, urban design, and emissions. This results in amplified temperatures during the day and night. Mitigation strategies include increasing green spaces, using cooler building materials, and implementing cooling techniques like green roofs and ventilation. Climate change and compact urban development also contribute to these heat islands. "
+    },
+    "automatic": {
+      "rouge1_f": 0.29906542056074764,
+      "rouge2_f": 0.07547169811320754,
+      "rougeL_f": 0.16822429906542055
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.037001999997301,
+    "tokens": 520,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_urban_heat_island",
+    "outputs": {
+      "default": "Urban heat islands occur when cities are warmer than surrounding rural areas due to heat-trapping from built environments, heat-absorbing materials, reduced vegetation, and human activities. These heat islands increase rainfall downwind, extend growing seasons, worsen air and water quality, and amplify heat waves. The effect can be mitigated through tree cover, green spaces, green roofs, lighter-colored surfaces, and improved ventilation. The intensity of urban heat islands varies depending on a city's background climate and local environment."
+    },
+    "automatic": {
+      "rouge1_f": 0.28193832599118945,
+      "rouge2_f": 0.06222222222222223,
+      "rougeL_f": 0.15859030837004406
+    },
+    "judge_records": [],
+    "cost_usd": 0.000989,
+    "latency_s": 3.324818699999014,
+    "tokens": 549,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_urban_heat_island",
+    "outputs": {
+      "default": "Urban heat islands (UHIs) make cities warmer than surrounding rural areas due to factors like heat-absorbing building materials, reduced greenery, and human activities, leading to effects such as increased rainfall downwind, extended growing seasons, and worsened air and water quality. The intensity of UHIs varies by local climate and urban design, but can be mitigated through tree cover, green roofs, reflective surfaces, and better ventilation. While climate change doesn't cause UHIs, it intensifies heat waves that amplify their effects, and dense urban development can further increase temperature exposure."
+    },
+    "automatic": {
+      "rouge1_f": 0.32067510548523204,
+      "rouge2_f": 0.05957446808510638,
+      "rougeL_f": 0.17721518987341772
+    },
+    "judge_records": [],
+    "cost_usd": 0.003282,
+    "latency_s": 3.3065441999933682,
+    "tokens": 861,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_urban_heat_island",
+    "outputs": {
+      "default": "Urban heat islands\u2014the relative warmth of cities compared to surrounding rural areas\u2014result from factors like heat-absorbing building materials, street layout and building size, reduced ventilation and greenery, and human heat emissions. Their effects include increased downwind rainfall, longer growing seasons, and degraded air and water quality, though the intensity of the effect varies with a city's background climate and local environment. Mitigation strategies include tree cover and green space, green roofs, passive daytime radiative cooling, ventilation corridors, and lighter-colored, less absorptive surfaces. While climate change does not cause urban heat islands, more frequent and intense heat waves amplify them, and compact, dense development may intensify the effect as well."
+    },
+    "automatic": {
+      "rouge1_f": 0.2681992337164751,
+      "rouge2_f": 0.05405405405405405,
+      "rougeL_f": 0.14559386973180077
+    },
+    "judge_records": [],
+    "cost_usd": 0.00928,
+    "latency_s": 4.837693100009346,
+    "tokens": 904,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_machine_learning",
+    "outputs": {
+      "default": "Machine learning rests on statistics, mathematical optimisation, and the PAC learning framework, with most algorithms expressed as empirical risk minimisation; deep\u2011learning breakthroughs have let neural networks outperform many earlier methods, causing \u201cmachine learning\u201d and \u201cartificial intelligence\u201d to become nearly synonymous. The field\u2019s name was coined by Arthur Samuel in 1959 after his checkers\u2011playing program, building on earlier cognitive research such as Hebb\u2019s neural theory (1949) and the first mathematical neural\u2011network model by Pitts and McCulloch, and leading to experimental learning machines in the early 1960s."
+    },
+    "automatic": {
+      "rouge1_f": 0.25,
+      "rouge2_f": 0.031746031746031744,
+      "rougeL_f": 0.125
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 262.008905900002,
+    "tokens": 809,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_machine_learning",
+    "outputs": {
+      "default": "Machine learning is grounded in statistics and mathematical optimisation, with data mining focusing on exploratory analysis via unsupervised learning and the PAC learning framework providing a theoretical basis for empirical risk minimisation. Advances in deep learning have enabled neural networks\u2014statistical algorithms inspired by Hebbian theory and early neural network models\u2014to outperform many traditional methods, leading to the dominance of machine learning within AI and the frequent interchange of the terms \u201cmachine learning\u201d and \u201cartificial intelligence.\u201d The field\u2019s origins trace back to the 1950s, when Arthur Samuel coined the term and developed a checkers\u2011playing program, building on earlier cognitive science work by Hebb, Pitts, and McCulloch that laid the groundwork for modern neural network architectures."
+    },
+    "automatic": {
+      "rouge1_f": 0.2948717948717949,
+      "rouge2_f": 0.03896103896103897,
+      "rougeL_f": 0.16666666666666666
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.2782882999890717,
+    "tokens": 759,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_machine_learning",
+    "outputs": {
+      "default": "Machine learning rests on statistical and optimisation techniques, with data mining as a related unsupervised\u2011learning discipline, and the PAC learning framework providing a theoretical foundation that frames most algorithms as empirical risk minimisation. Deep learning\u2019s neural\u2011network advances have driven current dominance of machine learning within AI, leading the terms to be used interchangeably although they are not synonymous. The field\u2019s roots trace back to mid\u201120th\u2011century cognitive studies, including Hebb\u2019s 1949 neural theory and Pitts\u2011McCulloch\u2019s early neural\u2011network model, with Arthur Samuel\u2019s 1959 \u201cmachine learning\u201d term and his checkers program marking the first practical implementation."
+    },
+    "automatic": {
+      "rouge1_f": 0.2676056338028169,
+      "rouge2_f": 0.014285714285714285,
+      "rougeL_f": 0.1267605633802817
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.011710699996911,
+    "tokens": 754,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_machine_learning",
+    "outputs": {
+      "default": "Machine learning is a field grounded in statistics and mathematical optimization, with its theoretical foundations rooted in the study of human cognitive processes and neural structures. The term was coined by Arthur Samuel in 1959, following early developments in the 1950s such as Donald Hebb's work on neuron interactions and the creation of early learning programs. Advances in deep learning have significantly boosted the performance of neural networks, leading to a dominance of machine learning in artificial intelligence that has made the two terms often used interchangeably."
+    },
+    "automatic": {
+      "rouge1_f": 0.36507936507936506,
+      "rouge2_f": 0.0967741935483871,
+      "rougeL_f": 0.20634920634920637
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.015086200000951,
+    "tokens": 544,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_machine_learning",
+    "outputs": {
+      "default": "Machine learning, a field rooted in studying human cognitive processes, was coined in 1959 by Arthur Samuel. It builds upon theories like Hebb's neural structure and research by Walter Pitts, Warren McCulloch, and others. The Hebbian theory forms the basis of how many machine learning algorithms function, with interconnected artificial neurons adjusting connection strengths based on data. "
+    },
+    "automatic": {
+      "rouge1_f": 0.3125,
+      "rouge2_f": 0.0425531914893617,
+      "rougeL_f": 0.20833333333333334
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.9115983000083361,
+    "tokens": 537,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_machine_learning",
+    "outputs": {
+      "default": "Machine learning is founded on statistics and mathematical optimization, with deep learning advances enabling neural networks to outperform traditional approaches. The field was formally named in 1959 by Arthur Samuel, though its roots trace back to earlier work on human cognition, including Donald Hebb's 1949 neural theory and the first mathematical models of neural networks by Pitts and McCulloch. Machine learning has become so dominant in artificial intelligence since the late 2000s that the terms are now often used interchangeably, despite being distinct concepts."
+    },
+    "automatic": {
+      "rouge1_f": 0.2926829268292683,
+      "rouge2_f": 0.04958677685950413,
+      "rougeL_f": 0.1788617886178862
+    },
+    "judge_records": [],
+    "cost_usd": 0.001024,
+    "latency_s": 2.762542399999802,
+    "tokens": 560,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_machine_learning",
+    "outputs": {
+      "default": "Machine learning is grounded in statistics, mathematical optimization, and probably approximately correct learning theory, with most algorithms framed as empirical risk minimization. Its historical roots trace to 1950s cognitive science research, including Arthur Samuel's 1959 coining of the term and his checkers-playing program, as well as Donald Hebb's Hebbian theory of neuron interactions and the neural network models proposed by Walter Pitts and Warren McCulloch. The field's rise to dominance within AI, particularly through deep learning advances in neural networks, has led to \"machine learning\" and \"artificial intelligence\" often being used interchangeably despite their distinct meanings."
+    },
+    "automatic": {
+      "rouge1_f": 0.28985507246376807,
+      "rouge2_f": 0.029411764705882353,
+      "rougeL_f": 0.17391304347826086
+    },
+    "judge_records": [],
+    "cost_usd": 0.0036160000000000003,
+    "latency_s": 4.00427769999078,
+    "tokens": 920,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_machine_learning",
+    "outputs": {
+      "default": "Machine learning is grounded in statistics and mathematical optimisation, with related fields such as data mining and theoretical frameworks like probably approximately correct learning, under which most traditional and deep learning algorithms can be characterised as empirical risk minimisation. Advances in deep learning enabled neural networks to outperform earlier approaches, making machine learning so dominant within AI from the late 2000s and early 2010s that the two terms are often used interchangeably despite not being synonymous. The term was coined in 1959 by IBM's Arthur Samuel, who created an early program calculating winning chances in checkers, though the field's roots lie in decades of research into human cognition. Contributors included Donald Hebb, whose 1949 theory of neuron interaction underpins how many learning algorithms adjust connection strengths, and Walter Pitts and Warren McCulloch, who proposed the first mathematical model of neural networks."
+    },
+    "automatic": {
+      "rouge1_f": 0.24309392265193372,
+      "rouge2_f": 0.0111731843575419,
+      "rougeL_f": 0.14364640883977903
+    },
+    "judge_records": [],
+    "cost_usd": 0.011015,
+    "latency_s": 5.417102799998247,
+    "tokens": 999,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_bretton_woods_system",
+    "outputs": {
+      "default": "In July 1944, delegates from 44 Allied nations met at Bretton Woods, New Hampshire, to design a new international monetary system, creating the International Monetary Fund and the International Bank for Reconstruction and Development (now part of the World Bank). The United States anchored the system to gold and the dollar, but the Soviet Union refused to ratify it, viewing the institutions as \u201cbranches of Wall Street.\u201d The system collapsed when the U.S. ended dollar\u2011gold convertibility in 1971, leading to floating exchange rates and the formal termination of Bretton Woods by the 1976 Jamaica Accords. Critics argue that the dollar\u2011based framework gave the U.S. undue advantage and that the IMF and World Bank\u2019s policy conditions constrained other economies."
+    },
+    "automatic": {
+      "rouge1_f": 0.43571428571428567,
+      "rouge2_f": 0.12230215827338128,
+      "rougeL_f": 0.22142857142857142
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 344.9261489000055,
+    "tokens": 670,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_bretton_woods_system",
+    "outputs": {
+      "default": "In July\u202f1944, delegates from 44 Allied nations met at Bretton Woods to design a postwar monetary order, resulting in the Bretton Woods Agreement that established the IMF and the IBRD (now part of the World Bank Group) and tied the global system to the U.S. dollar and gold. The U.S., holding two\u2011thirds of the world\u2019s gold, insisted on this dollar\u2011gold link, while Soviet participants later refused to ratify the accords, labeling the institutions as \u201cbranches of Wall Street.\u201d The system collapsed when President Nixon ended dollar\u2011to\u2011gold convertibility in 1971, leading to floating exchange rates and the formal termination of Bretton Woods by the 1976 Jamaica Accords, a transition that critics say favored U.S. interests and constrained other nations\u2019 monetary policy while imposing costly conditions through the IMF and World Bank."
+    },
+    "automatic": {
+      "rouge1_f": 0.41216216216216217,
+      "rouge2_f": 0.108843537414966,
+      "rougeL_f": 0.21621621621621623
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.5349551000108477,
+    "tokens": 941,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_bretton_woods_system",
+    "outputs": {
+      "default": "In July\u202f1944, delegates from 44 Allied nations met at the Mount Washington Hotel to create the Bretton Woods system, which established the IMF and the International Bank for Reconstruction and Development (now part of the World Bank Group) and tied currencies to the U.S. dollar and gold. Although the Soviet Union attended, it never ratified the agreements and later criticized the institutions as \u201cWall Street\u201d branches; the system formally ended with the 1971 Nixon shock and the 1976 Jamaica Accords, after which most currencies floated. Critics argue the dollar\u2011based arrangement gave the U.S. an unchecked advantage while limiting other nations\u2019 monetary flexibility, and that the IMF and World Bank\u2019s conditional lending often imposed harsh strains on borrower economies."
+    },
+    "automatic": {
+      "rouge1_f": 0.3714285714285714,
+      "rouge2_f": 0.10071942446043165,
+      "rougeL_f": 0.17857142857142858
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.4154194000002462,
+    "tokens": 807,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_bretton_woods_system",
+    "outputs": {
+      "default": "Delegates from 44 Allied nations met at the 1944 Bretton Woods Conference to establish a new international monetary system, creating the IMF and the World Bank while pegging the US dollar to gold. Although the Soviet Union declined to ratify the agreements, the institutions became operational in 1945, but the system effectively ended in 1971 when the US terminated dollar-gold convertibility. This shift led to the adoption of floating exchange rates, a change formally recognized by the 1976 Jamaica Accords, though critics argue the original system favored US economic flexibility at the expense of other nations' monetary policy."
+    },
+    "automatic": {
+      "rouge1_f": 0.36718749999999994,
+      "rouge2_f": 0.06299212598425197,
+      "rougeL_f": 0.1875
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.0012109000090277,
+    "tokens": 570,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_bretton_woods_system",
+    "outputs": {
+      "default": "The Bretton Woods Conference in 1944 aimed to rebuild the international economic system after World War II. The conference established the International Monetary Fund (IMF) and the International Bank for Reconstruction and Development (now part of the World Bank Group). The US dollar became the global reserve currency, leading to the end of the Bretton Woods system on August 15, 1971. Since then, currencies have floated, allowing for greater flexibility but also criticisms of US dominance and limitations for other nations adjusting their monetary policies. "
+    },
+    "automatic": {
+      "rouge1_f": 0.371900826446281,
+      "rouge2_f": 0.10833333333333334,
+      "rougeL_f": 0.20661157024793386
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.8133304999937536,
+    "tokens": 578,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_bretton_woods_system",
+    "outputs": {
+      "default": "The Bretton Woods Conference of 1944 established the International Monetary System and created the IMF and World Bank to regulate international monetary relations, with the system anchored to both gold and the US dollar. The Soviet Union declined to ratify the agreements, viewing the institutions as American-dominated, while the system became operational in 1945. The Bretton Woods system collapsed in 1971 when the United States ended dollar-to-gold convertibility, leading to floating exchange rates that characterize the modern era. Critics argue the system unfairly advantaged the United States while constraining other nations' monetary policy flexibility."
+    },
+    "automatic": {
+      "rouge1_f": 0.4488188976377952,
+      "rouge2_f": 0.13492063492063494,
+      "rougeL_f": 0.23622047244094493
+    },
+    "judge_records": [],
+    "cost_usd": 0.0011220000000000002,
+    "latency_s": 2.948294199988595,
+    "tokens": 586,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_bretton_woods_system",
+    "outputs": {
+      "default": "In July 1944, delegates from 44 Allied nations met at Bretton Woods, New Hampshire, to establish a postwar international monetary system, creating the IMF and IBRD (later part of the World Bank Group), with the US dollar\u2014backed by gold\u2014serving as the system's anchor. The Soviet Union declined to ratify the agreements, calling the institutions \"branches of Wall Street.\" The system collapsed when the US ended dollar-gold convertibility in 1971, ushering in an era of floating exchange rates that was formally recognized by the 1976 Jamaica Accords. Critics contend the system gave the US disproportionate monetary flexibility while constraining other economies and that IMF/World Bank policy conditions burdened borrowing nations."
+    },
+    "automatic": {
+      "rouge1_f": 0.3542435424354244,
+      "rouge2_f": 0.04460966542750929,
+      "rougeL_f": 0.16974169741697415
+    },
+    "judge_records": [],
+    "cost_usd": 0.003852,
+    "latency_s": 3.7642903000087244,
+    "tokens": 938,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_bretton_woods_system",
+    "outputs": {
+      "default": "In July 1944, delegates from 44 Allied nations met at Bretton Woods, New Hampshire, for the United Nations Monetary and Financial Conference, signing an agreement that created rules and institutions\u2014including the IMF and the IBRD (now part of the World Bank Group)\u2014to govern the international monetary system. At US insistence, the system was based on both gold and the US dollar; the Soviet Union attended but refused to ratify, calling the new institutions \"branches of Wall Street.\" The system unraveled when the United States ended dollar\u2013gold convertibility on 15 August 1971, after which other fixed currencies floated, a shift formally ratified by the 1976 Jamaica Accords. Critics contend the dollar's central role gave the US unusual latitude while fixed rates constrained Europe and Japan, and that IMF and World Bank lending conditions imposed heavy burdens on borrowing countries."
+    },
+    "automatic": {
+      "rouge1_f": 0.4280936454849499,
+      "rouge2_f": 0.10101010101010101,
+      "rougeL_f": 0.18060200668896317
+    },
+    "judge_records": [],
+    "cost_usd": 0.010855,
+    "latency_s": 7.159373000002233,
+    "tokens": 987,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_vaccine",
+    "outputs": {
+      "default": "Vaccines, administered through vaccination, can be prophylactic\u2014preventing future infections\u2014or therapeutic, treating existing diseases such as cancer, and some confer full sterilizing immunity. Their widespread use has led to the eradication of smallpox and major reductions in polio, measles, and tetanus, with the WHO noting licensed vaccines for 25 preventable infections. Originating from 16th\u2011century Chinese inoculation practices and refined by Edward Jenner\u2019s cow\u2011pox work in the 1790s, the field of vaccinology\u2014expanded by Louis Pasteur\u2014now enjoys broad scientific consensus on vaccines\u2019 safety and effectiveness."
+    },
+    "automatic": {
+      "rouge1_f": 0.2795698924731183,
+      "rouge2_f": 0.03260869565217391,
+      "rougeL_f": 0.12903225806451615
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 310.1988790000032,
+    "tokens": 733,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_vaccine",
+    "outputs": {
+      "default": "Vaccines are used either prophylactically to prevent future infections or therapeutically to treat existing diseases, and some provide sterilizing immunity that blocks infection entirely.  Vaccination has eradicated smallpox and greatly reduced diseases such as polio, measles, and tetanus, with WHO licensing vaccines for 25 preventable infections.  The practice began with smallpox variolation in 16th\u2011century China, was popularized in Britain by Lady Mary Wortley Montagu, and the term \u201cvaccine\u201d was coined by Edward Jenner in 1798 after his cowpox work, later expanded by Louis Pasteur; today, vaccinology is the field that develops and produces these safe and effective interventions."
+    },
+    "automatic": {
+      "rouge1_f": 0.2755102040816326,
+      "rouge2_f": 0.020618556701030927,
+      "rougeL_f": 0.15306122448979592
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 4.266039300011471,
+    "tokens": 735,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_vaccine",
+    "outputs": {
+      "default": "Vaccines are either prophylactic, preventing future infections, or therapeutic, treating existing diseases, and some provide complete sterilizing immunity. Vaccination, the administration of these vaccines, has eradicated smallpox and largely controlled diseases such as polio, measles, and tetanus, with the WHO listing licensed vaccines for twenty\u2011five infections. The practice began with smallpox variolation in ancient China, evolved through Lady Mary Wortley Montagu\u2019s introduction to Britain in 1721, and was formalized by Edward Jenner\u2019s cowpox vaccine in 1798, later expanded by Louis Pasteur in 1881. Vaccinology is the field that develops and produces vaccines, and the consensus among scientists is that vaccines are safe and highly effective in preventing and eradicating infectious diseases."
+    },
+    "automatic": {
+      "rouge1_f": 0.29383886255924174,
+      "rouge2_f": 0.009569377990430623,
+      "rougeL_f": 0.1800947867298578
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 4.965377100001206,
+    "tokens": 778,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_vaccine",
+    "outputs": {
+      "default": "Vaccines are prophylactic or therapeutic biological agents that stimulate the immune system to recognize and fight pathogens, making vaccination the most effective method for preventing infectious diseases. This practice has led to the global eradication of smallpox and the significant reduction of diseases like polio and measles, with the World Health Organization currently reporting licensed vaccines for twenty-five preventable infections. The field of vaccinology traces its origins to Edward Jenner\u2019s 1798 development of the smallpox vaccine using cowpox, a concept later expanded by Louis Pasteur to encompass other protective inoculations."
+    },
+    "automatic": {
+      "rouge1_f": 0.3703703703703704,
+      "rouge2_f": 0.0748663101604278,
+      "rougeL_f": 0.1904761904761905
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 2.9244871999981115,
+    "tokens": 583,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_vaccine",
+    "outputs": {
+      "default": "Vaccines serve as either prophylactic or therapeutic measures against infectious diseases. They have played a significant role in eradicating smallpox and significantly reducing the prevalence of diseases like polio, measles, and tetanus. Edward Jenner's discovery of cowpox protection against smallpox in 1798 laid the foundation for vaccine development. Vaccines are proven to be highly effective and safe, stimulating the body's immune system to recognize, destroy, and remember foreign agents, providing immunity against future infections. "
+    },
+    "automatic": {
+      "rouge1_f": 0.3583815028901734,
+      "rouge2_f": 0.04678362573099415,
+      "rougeL_f": 0.21965317919075145
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 3.410048599995207,
+    "tokens": 601,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_vaccine",
+    "outputs": {
+      "default": "Vaccines are preventive or therapeutic treatments that stimulate the immune system to fight infectious diseases, with vaccination being the most effective method of disease prevention. The practice originated in 10th-century China for smallpox prevention and was formalized by Edward Jenner in 1798, whose work led to the terms \"vaccine\" and \"vaccination.\" Vaccines have been instrumental in eradicating smallpox worldwide and controlling diseases like polio, measles, and tetanus, with the WHO reporting licensed vaccines available for twenty-five preventable infections. There is overwhelming scientific consensus that vaccines are safe and effective, as they enable the immune system to recognize and destroy pathogens while retaining memory of them for future encounters."
+    },
+    "automatic": {
+      "rouge1_f": 0.3671497584541063,
+      "rouge2_f": 0.06829268292682927,
+      "rougeL_f": 0.23188405797101452
+    },
+    "judge_records": [],
+    "cost_usd": 0.001251,
+    "latency_s": 5.168621600008919,
+    "tokens": 639,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_vaccine",
+    "outputs": {
+      "default": "Vaccines can be prophylactic or therapeutic, and vaccination is the most effective method for preventing infectious diseases, contributing to smallpox eradication and reduced polio, measles, and tetanus. The practice originated with smallpox inoculation in China as early as the 10th century, later reaching Britain in 1721, with Edward Jenner developing the first true vaccine using cowpox in 1798\u2014coining the term \"vaccine.\" Louis Pasteur later extended the terminology in 1881, and there is now overwhelming scientific consensus that vaccines are safe and effective, working by training the immune system to recognize and remember pathogens."
+    },
+    "automatic": {
+      "rouge1_f": 0.31413612565445026,
+      "rouge2_f": 0.06349206349206349,
+      "rougeL_f": 0.15706806282722513
+    },
+    "judge_records": [],
+    "cost_usd": 0.003538,
+    "latency_s": 4.174074400012614,
+    "tokens": 929,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_vaccine",
+    "outputs": {
+      "default": "Vaccines can be prophylactic, preventing future infection, or therapeutic, treating existing disease, and vaccination is considered the most effective means of preventing infectious disease\u2014credited with eradicating smallpox and curbing polio, measles, and tetanus. The WHO notes licensed vaccines exist for twenty-five preventable infections. Inoculation against smallpox was first recorded in 16th-century China and introduced to Britain by Lady Mary Wortley Montagu in 1721, while Edward Jenner developed the first vaccine and coined the term from Variolae vaccinae (cowpox), which Louis Pasteur later broadened in 1881. Scientific consensus overwhelmingly holds that vaccines are safe and effective, working by training the immune system to recognize and remember foreign agents."
+    },
+    "automatic": {
+      "rouge1_f": 0.2995169082125604,
+      "rouge2_f": 0.05853658536585366,
+      "rougeL_f": 0.17391304347826086
+    },
+    "judge_records": [],
+    "cost_usd": 0.010245,
+    "latency_s": 5.628361900002346,
+    "tokens": 985,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_apollo_11",
+    "outputs": {
+      "default": "Apollo\u202f11, launched on July\u202f16\u202f1969, was NASA\u2019s fifth crewed Apollo mission and the first to land humans on the Moon, carrying Neil\u202fArmstrong, Michael\u202fCollins, and Buzz\u202fAldrin. After a three\u2011day transit, Armstrong and Aldrin landed the Lunar Module Eagle in the Sea of Tranquility on July\u202f20, where they spent about two and a half hours walking, planting a flag, and collecting 21.5\u202fkg of lunar samples while Collins orbited in the Command Module. The crew reunited, returned to Earth, and splashed down on July\u202f24, marking the climax of the Cold War\u2011driven Space Race."
+    },
+    "automatic": {
+      "rouge1_f": 0.45161290322580644,
+      "rouge2_f": 0.18300653594771243,
+      "rougeL_f": 0.25806451612903225
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 252.29446520000056,
+    "tokens": 680,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_apollo_11",
+    "outputs": {
+      "default": "Apollo 11, launched July\u202f16\u202f1969 on a Saturn\u202fV from Kennedy Space Center, carried Commander Neil\u202fArmstrong, Command Module Pilot Michael\u202fCollins, and Lunar Module Pilot Edwin \u201cBuzz\u201d\u202fAldrin on their second and final spaceflight. After a three\u2011day journey, Armstrong and Aldrin landed the LM \u201cEagle\u201d in the Sea of Tranquility on July\u202f20, walked for about two and a half hours, planted a flag, spoke with President Nixon, and collected 21.5\u202fkg of lunar material before rejoining Collins in lunar orbit. The crew safely splashed down in the Pacific on July\u202f24, marking the culmination of the Space Race and the first human Moon landing."
+    },
+    "automatic": {
+      "rouge1_f": 0.4444444444444444,
+      "rouge2_f": 0.2625,
+      "rougeL_f": 0.29629629629629634
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.3198336999921594,
+    "tokens": 729,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_apollo_11",
+    "outputs": {
+      "default": "Apollo\u202f11, launched July\u202f16\u202f1969 on a Saturn\u202fV from Kennedy Space Center, was the first crewed mission to land humans on the Moon, with Commander Neil Armstrong, Command Module Pilot Michael Collins, and Lunar Module Pilot Edwin \u201cBuzz\u201d\u202fAldrin. Armstrong and Aldrin descended in the LM\u202fEagle, planted an American flag, conducted scientific experiments, and returned to orbit after about 21\u202fhours, collecting 21.5\u202fkg of lunar material before re\u2011entering Earth\u2019s atmosphere on July\u202f24. The mission marked the culmination of the Cold\u2011War Space Race and fulfilled President Kennedy\u2019s 1961 promise to land a man on the Moon before the decade\u2019s end."
+    },
+    "automatic": {
+      "rouge1_f": 0.45398773006134974,
+      "rouge2_f": 0.2732919254658385,
+      "rougeL_f": 0.34355828220858897
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.9777162000100361,
+    "tokens": 821,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_apollo_11",
+    "outputs": {
+      "default": "Apollo 11, launched in July 1969, was the first mission to land humans on the Moon, crewed by Neil Armstrong, Michael Collins, and Buzz Aldrin. Armstrong and Aldrin spent over 21 hours on the lunar surface, where they collected samples, deployed scientific instruments, and became the first humans to walk on the Moon. The mission successfully returned the crew to Earth and marked the culmination of the Cold War-era Space Race between the United States and the Soviet Union."
+    },
+    "automatic": {
+      "rouge1_f": 0.4360902255639098,
+      "rouge2_f": 0.1984732824427481,
+      "rougeL_f": 0.3157894736842105
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.9171768999949563,
+    "tokens": 566,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_apollo_11",
+    "outputs": {
+      "default": "Apollo 11 was a historic NASA mission in 1969 that landed the first two humans on the Moon: Neil Armstrong and Buzz Aldrin. They descended from the Lunar Module Eagle while Michael Collins piloted the Command Module Columbia in lunar orbit. The mission, a significant achievement during the Space Race between the US and the USSR, led to the recovery of astronauts and fulfilled a national goal for the United States. "
+    },
+    "automatic": {
+      "rouge1_f": 0.5,
+      "rouge2_f": 0.19672131147540986,
+      "rougeL_f": 0.27419354838709675
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 2.75262310000835,
+    "tokens": 608,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_apollo_11",
+    "outputs": {
+      "default": "Apollo 11 (July 16\u201324, 1969) was the historic American spaceflight that first landed humans on the Moon, crewed by Neil Armstrong, Michael Collins, and Buzz Aldrin. Armstrong and Aldrin descended to the lunar surface in the Lunar Module Eagle on July 20, with Armstrong becoming the first human to walk on the Moon, followed by Aldrin nineteen minutes later. During their approximately two and a half hours on the surface, they planted an American flag, collected lunar samples, and deployed scientific instruments before returning to lunar orbit to rejoin Collins. The crew safely returned to Earth on July 24, fulfilling a major goal of the Space Race competition between the United States and Soviet Union."
+    },
+    "automatic": {
+      "rouge1_f": 0.378698224852071,
+      "rouge2_f": 0.19161676646706588,
+      "rougeL_f": 0.29585798816568043
+    },
+    "judge_records": [],
+    "cost_usd": 0.0012699999999999999,
+    "latency_s": 2.5418330000102287,
+    "tokens": 642,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_apollo_11",
+    "outputs": {
+      "default": "Apollo 11 (July 16\u201324, 1969) was the NASA mission that first landed humans on the Moon, crewed by Neil Armstrong, Michael Collins, and Buzz Aldrin. Armstrong and Aldrin descended in the Lunar Module Eagle to the Sea of Tranquility, becoming the first two humans to walk on the lunar surface while Collins orbited above in the Command Module Columbia. During their moonwalk, they planted an American flag, spoke with President Nixon, deployed scientific instruments, and collected lunar samples before safely returning to Earth. The mission marked the culmination of the Cold War-era Space Race between the United States and the Soviet Union."
+    },
+    "automatic": {
+      "rouge1_f": 0.4585987261146497,
+      "rouge2_f": 0.21935483870967742,
+      "rougeL_f": 0.30573248407643316
+    },
+    "judge_records": [],
+    "cost_usd": 0.0038,
+    "latency_s": 4.250359300000127,
+    "tokens": 972,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_apollo_11",
+    "outputs": {
+      "default": "Apollo 11, launched July 16, 1969, was the NASA mission that first landed humans on the Moon, crewed by Neil Armstrong, Michael Collins, and Buzz Aldrin. After a three-day transit, Armstrong and Aldrin landed the Lunar Module Eagle in the Sea of Tranquility on July 20 while Collins orbited in the command module Columbia. The two astronauts spent about two and a half hours walking on the surface\u2014planting an American flag, speaking with President Nixon, deploying instruments, and collecting 21.5 kg of lunar samples\u2014before returning to orbit and splashing down in the Pacific on July 24. The mission marked the culmination of the Cold War\u2013driven Space Race between the United States and the Soviet Union."
+    },
+    "automatic": {
+      "rouge1_f": 0.4046242774566475,
+      "rouge2_f": 0.19883040935672516,
+      "rougeL_f": 0.26589595375722547
+    },
+    "judge_records": [],
+    "cost_usd": 0.010075,
+    "latency_s": 4.848592099995585,
+    "tokens": 995,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_penicillin",
+    "outputs": {
+      "default": "Penicillins are \u03b2\u2011lactam antibiotics derived primarily from the mould\u202fPenicillium chrysogenum, with penicillin\u202fG and penicillin\u202fV being the only natural compounds still used clinically. Discovered by Alexander Fleming in 1928 and later purified by Florey and Chain, they revolutionized treatment of staphylococcal and streptococcal infections, and semisynthetic derivatives now cover a broader bacterial spectrum. Although many bacteria have developed resistance, penicillins remain widely prescribed, and most reported penicillin allergies are not permanent\u201490\u202f% of patients can eventually tolerate the drug, and cross\u2011reactivity with cephalosporins is low."
+    },
+    "automatic": {
+      "rouge1_f": 0.4742268041237114,
+      "rouge2_f": 0.09375,
+      "rougeL_f": 0.2371134020618557
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 310.97569939999084,
+    "tokens": 818,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_penicillin",
+    "outputs": {
+      "default": "Penicillins are \u03b2\u2011lactam antibiotics derived from Penicillium moulds, mainly P. chrysogenum, and include the clinically used penicillin\u202fG and V. First discovered by Alexander Fleming in 1928, they revolutionized treatment of staphylococcal and streptococcal infections and remain widely used despite rising bacterial resistance. Most penicillins are produced by deep\u2011tank fermentation and purified, with several semisynthetic variants extending their spectrum to staphylococci, gram\u2011negative rods, and Pseudomonas. Although 10\u202f% of Americans report penicillin allergy, most can tolerate the drug after avoidance, and cross\u2011reactivity with cephalosporins is low (\u22483\u202f%)."
+    },
+    "automatic": {
+      "rouge1_f": 0.4512820512820513,
+      "rouge2_f": 0.155440414507772,
+      "rougeL_f": 0.2564102564102564
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.2050702000124147,
+    "tokens": 786,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_penicillin",
+    "outputs": {
+      "default": "Penicillins are \u03b2\u2011lactam antibiotics derived from Penicillium moulds, mainly P. chrysogenum, and include the clinically used penicillin G and V as well as a range of semisynthetic variants that broaden the spectrum to staphylococci, streptococci and pseudomonads. First discovered by Alexander Fleming in 1928, penicillin was purified in 1940 and has since become a cornerstone of bacterial therapy, though widespread use has led to resistance. While 10\u202f% of Americans claim a penicillin allergy, most can tolerate it after avoidance, and cross\u2011reactivity with cephalosporins is low."
+    },
+    "automatic": {
+      "rouge1_f": 0.42708333333333337,
+      "rouge2_f": 0.10526315789473684,
+      "rougeL_f": 0.25
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.1085807000054047,
+    "tokens": 769,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_penicillin",
+    "outputs": {
+      "default": "Penicillins are a group of \u03b2-lactam antibiotics originally derived from *Penicillium* moulds, with penicillin G and V being the primary natural compounds used in clinical settings. Discovered by Alexander Fleming in 1928 and later purified by Howard Florey and Ernst Boris Chain, these medications were among the first effective treatments for bacterial infections caused by staphylococci and streptococci. Although bacterial resistance has increased due to extensive use, penicillins remain widely prescribed, and semisynthetic variants have expanded their effectiveness against a broader spectrum of bacteria."
+    },
+    "automatic": {
+      "rouge1_f": 0.568421052631579,
+      "rouge2_f": 0.26595744680851063,
+      "rougeL_f": 0.3684210526315789
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.0127351999981329,
+    "tokens": 702,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_penicillin",
+    "outputs": {
+      "default": "Penicillins are a group of antibiotics derived from Penicillium moulds, originally discovered by Alexander Fleming in 1928. They are effective against various bacterial infections and are widely used despite the development of resistance by some bacteria. Penicillin was the first antibiotic and shared the 1945 Nobel Prize with Chain and Florey. Semisynthetic penicillins offer broader spectrum activity against bacteria. "
+    },
+    "automatic": {
+      "rouge1_f": 0.43636363636363634,
+      "rouge2_f": 0.14723926380368096,
+      "rougeL_f": 0.2545454545454546
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.7952079999959096,
+    "tokens": 703,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_penicillin",
+    "outputs": {
+      "default": "Penicillins are \u03b2-lactam antibiotics originally derived from Penicillium moulds, with penicillin G and V being the two natural compounds in clinical use today. Discovered by Alexander Fleming in 1928 and purified by Florey and Chain in 1940, penicillins were among the first effective treatments for bacterial infections caused by staphylococci and streptococci, though bacterial resistance has developed with extensive use. While 10% of the U.S. population reports penicillin allergies, most can eventually tolerate the drug as allergic sensitivity decreases over time, and most can safely use alternative cephalosporins due to low cross-reactivity. Semisynthetic penicillins have been developed to be effective against a broader spectrum of bacteria."
+    },
+    "automatic": {
+      "rouge1_f": 0.5607476635514018,
+      "rouge2_f": 0.25471698113207547,
+      "rougeL_f": 0.31775700934579443
+    },
+    "judge_records": [],
+    "cost_usd": 0.001507,
+    "latency_s": 3.099266899997019,
+    "tokens": 791,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_penicillin",
+    "outputs": {
+      "default": "Penicillins are \u03b2-lactam antibiotics derived from Penicillium moulds, with penicillin G and penicillin V being the main clinically used natural forms, alongside semisynthetic variants developed for broader antibacterial spectrums. Discovered by Alexander Fleming in 1928 and later purified by Howard Florey and Ernst Boris Chain's team in 1940, penicillin revolutionized treatment of bacterial infections, earning the three scientists the 1945 Nobel Prize. Despite widespread bacterial resistance developing over time, penicillins remain widely used today, and many patients who report allergies can eventually tolerate the drug or related cephalosporins due to low cross-reactivity."
+    },
+    "automatic": {
+      "rouge1_f": 0.41000000000000003,
+      "rouge2_f": 0.12121212121212123,
+      "rougeL_f": 0.22
+    },
+    "judge_records": [],
+    "cost_usd": 0.003972,
+    "latency_s": 3.6721549999929266,
+    "tokens": 1046,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_penicillin",
+    "outputs": {
+      "default": "Penicillins are a group of \u03b2-lactam antibiotics derived from Penicillium moulds, with penicillin G and penicillin V being the two natural forms in clinical use; they were among the first drugs effective against staphylococcal and streptococcal infections and remain widely used despite growing bacterial resistance. Although 10% of Americans report penicillin allergies, most eventually tolerate the drug, and cross-reactivity with cephalosporins is only about 3%. Penicillin was discovered by Alexander Fleming in 1928, first used therapeutically by Cecil George Paine in 1930, and purified in 1940 by Howard Florey and Ernst Boris Chain's Oxford team, work that earned the three men the 1945 Nobel Prize in Physiology or Medicine. Semisynthetic versions, including antistaphylococcal, amino-, and antipseudomonal penicillins, extend the drug's spectrum of activity."
+    },
+    "automatic": {
+      "rouge1_f": 0.4396551724137931,
+      "rouge2_f": 0.16521739130434782,
+      "rougeL_f": 0.25862068965517243
+    },
+    "judge_records": [],
+    "cost_usd": 0.01183,
+    "latency_s": 7.070114399990416,
+    "tokens": 1122,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_amazon_rainforest",
+    "outputs": {
+      "default": "The Amazon rainforest, covering about 60\u202f% of its area in Brazil and extending into nine other South American nations, contains roughly 390\u202fbillion trees across 16\u202f000 species and houses over 30\u202fmillion people from 350 ethnic groups, including 60 largely isolated indigenous communities. Large\u2011scale deforestation is causing severe ecological and economic damage, with losses in Brazil projected to far exceed the value of commodities produced from cleared land, prompting initiatives like the World Bank\u2019s 2023 non\u2011deforestation economic program. The name \u201cAmazon\u201d derives from Francisco de Orellana\u2019s comparison of local warrior women to Greek Amazons, and archaeological evidence shows human settlement in the basin for at least 11\u202f200 years, predating earlier assumptions of sparse pre\u2011colonial habitation."
+    },
+    "automatic": {
+      "rouge1_f": 0.24742268041237114,
+      "rouge2_f": 0.03125,
+      "rougeL_f": 0.12371134020618557
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 300.14798619999783,
+    "tokens": 757,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_amazon_rainforest",
+    "outputs": {
+      "default": "The Amazon rainforest covers 60\u202f% of Brazil, with the rest spread across Peru, Colombia, and smaller amounts in other South American countries, and it contains about 390\u202fbillion trees across 16,000 species, making it the world\u2019s largest and most biodiverse tropical forest. Over 30\u202fmillion people from 350 ethnic groups, including 60 largely isolated indigenous groups, live in the region, which is divided among nine national political systems and 3,344 recognized indigenous territories. Large\u2011scale deforestation\u2014driven by economic activities\u2014causes severe ecological and agricultural damage, with Brazil\u2019s economic losses estimated to be seven times higher than the value of commodities produced, prompting the World Bank in 2023 to propose a non\u2011deforestation economic program."
+    },
+    "automatic": {
+      "rouge1_f": 0.31413612565445026,
+      "rouge2_f": 0.07407407407407408,
+      "rougeL_f": 0.17801047120418848
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.0535161000007065,
+    "tokens": 751,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_amazon_rainforest",
+    "outputs": {
+      "default": "The Amazon rainforest, which occupies roughly 60\u202f% of all remaining tropical forest area, is concentrated in Brazil and also spans Peru, Colombia and several smaller nations, and it is the world\u2019s largest and most biodiverse forest with about 390\u202fbillion trees across 16,000 species. More than 30\u202fmillion people from 350 ethnic groups\u2014including 9\u202f% indigenous\u2014live within its boundaries, and large\u2011scale deforestation is causing severe ecological, agricultural and economic damage, with potential losses in Brazil estimated to be seven times higher than the value of products created by the clearing. Archaeological evidence shows human habitation of the region for at least 11,200\u202fyears, and in 2023 the World Bank proposed a non\u2011deforestation economic program to mitigate these losses."
+    },
+    "automatic": {
+      "rouge1_f": 0.2653061224489796,
+      "rouge2_f": 0.05154639175257732,
+      "rougeL_f": 0.14285714285714285
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.2073739000043133,
+    "tokens": 906,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_amazon_rainforest",
+    "outputs": {
+      "default": "The Amazon rainforest, primarily located in Brazil, Peru, and Colombia, is the world's largest and most biodiverse tropical forest, containing an estimated 390 billion trees and supporting over 30 million people across 350 ethnic groups. While the region has been inhabited for at least 11,200 years, it currently faces significant threats from large-scale deforestation, which causes severe agricultural damage and economic losses that far outweigh the benefits of commodity production. In response to these environmental challenges, the World Bank has proposed a non-deforestation-based economic program to sustain the region."
+    },
+    "automatic": {
+      "rouge1_f": 0.24096385542168677,
+      "rouge2_f": 0.024390243902439025,
+      "rougeL_f": 0.13253012048192772
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.96705180000572,
+    "tokens": 616,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_amazon_rainforest",
+    "outputs": {
+      "default": "The Amazon rainforest, covering parts of Brazil, Peru, Colombia, Bolivia, Ecuador, Guyana, and Venezuela, is the largest and most biodiverse tropical rainforest in the world. It comprises around half of all remaining rainforests and is home to around 30 million people, including 60 indigenous groups mostly unaffected by the outside world. The name \"Amazon\" is derived from the Amazons of Greek mythology, and the region has been inhabited for at least 11,200 years. Deforestation poses significant issues, with potential economic costs for Brazil and negative impacts on biodiversity and local communities. In 2023, the World Bank proposed an economic program focusing on non-deforestation to address these concerns. "
+    },
+    "automatic": {
+      "rouge1_f": 0.29834254143646405,
+      "rouge2_f": 0.08938547486033518,
+      "rougeL_f": 0.16574585635359118
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.7476253000058932,
+    "tokens": 693,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_amazon_rainforest",
+    "outputs": {
+      "default": "The Amazon rainforest, located primarily in Brazil (60%) with portions in Peru, Colombia, and other South American nations, is the world's largest and most biodiverse tropical rainforest, containing an estimated 390 billion trees across 16,000 species. Over 30 million people from 350 ethnic groups, including 60 largely isolated indigenous groups, inhabit the Amazon across multiple national territories. The forest faces severe threats from large-scale deforestation, which causes significant economic losses and agricultural damage, prompting the World Bank to propose alternative economic development strategies in 2023. Archaeological evidence indicates humans have inhabited the Amazon region for at least 11,200 years."
+    },
+    "automatic": {
+      "rouge1_f": 0.28571428571428575,
+      "rouge2_f": 0.057803468208092484,
+      "rougeL_f": 0.13714285714285712
+    },
+    "judge_records": [],
+    "cost_usd": 0.001255,
+    "latency_s": 2.8369497999956366,
+    "tokens": 663,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_amazon_rainforest",
+    "outputs": {
+      "default": "The Amazon rainforest spans nine nations (60% in Brazil) and represents the world's largest, most biodiverse tropical rainforest, home to over 30 million people from 350 ethnic groups, including isolated indigenous communities. Large-scale deforestation causes severe economic and agricultural harm, prompting proposals like the World Bank's 2023 non-deforestation economic program. The name \"Amazon\" derives from Francisco de Orellana's battle with tribes whose women fought alongside men, evoking Greek mythology's Amazons, while archaeological evidence shows human habitation dating back at least 11,200 years."
+    },
+    "automatic": {
+      "rouge1_f": 0.23602484472049687,
+      "rouge2_f": 0.05031446540880504,
+      "rougeL_f": 0.11180124223602485
+    },
+    "judge_records": [],
+    "cost_usd": 0.003548,
+    "latency_s": 4.2277413999981945,
+    "tokens": 946,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_amazon_rainforest",
+    "outputs": {
+      "default": "The Amazon rainforest spans nine countries\u201460% of it in Brazil\u2014and constitutes over half of Earth's remaining rainforest, holding an estimated 390 billion trees across about 16,000 species. Over 30 million people from 350 ethnic groups live there, including indigenous peoples who make up 9% of the population, with 60 groups remaining largely isolated. Large-scale deforestation continues despite economic analyses showing losses potentially seven times greater than the value of commodities produced, prompting the World Bank to propose a non-deforestation economic program in 2023. The forest's name derives from Francisco de Orellana's encounter with tribes whose women fought alongside men, evoking the Amazons of Greek mythology, and archaeological evidence indicates human settlement in the region dating back at least 11,200 years."
+    },
+    "automatic": {
+      "rouge1_f": 0.21890547263681592,
+      "rouge2_f": 0.05025125628140704,
+      "rougeL_f": 0.12935323383084577
+    },
+    "judge_records": [],
+    "cost_usd": 0.010445000000000001,
+    "latency_s": 5.813516099995468,
+    "tokens": 1009,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_desalination",
+    "outputs": {
+      "default": "Desalination converts salt water into fresh water, producing brine as a by\u2011product, and is increasingly vital for global water security as demand for freshwater grows. The industry, which relies on thermal distillation or membrane methods such as reverse osmosis, produced about 95\u202fmillion\u202fm\u00b3/day in 2019 and had a capacity of roughly 97\u202fmillion\u202fm\u00b3/day across 16,800 plants by 2020, though it remains energy\u2011intensive, accounting for about 25\u202f% of water\u2011sector energy use. Advances have reduced energy intensity from 20\u201330\u202fkWh/m\u00b3 in the 1970s to around 3\u202fkWh/m\u00b3 today, making desalination a more cost\u2011effective supplement where surface water, groundwater, or recycling are insufficient. Major players include Acciona, Dow, Siemens, DuPont, Doosan, Toray, and Xylem."
+    },
+    "automatic": {
+      "rouge1_f": 0.3468208092485549,
+      "rouge2_f": 0.08187134502923978,
+      "rougeL_f": 0.16184971098265893
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 299.54848470000434,
+    "tokens": 759,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_desalination",
+    "outputs": {
+      "default": "Desalination is the artificial removal of salts from seawater to produce fresh water, a process that has become essential for global water security as rainfall becomes less reliable. Worldwide, about 95\u202fmillion\u202fm\u00b3 of desalinated water is produced daily, with capacity expected to rise to over 114\u202fmillion\u202fm\u00b3/day, though the process remains energy\u2011intensive\u2014currently about 3\u202fkWh/m\u00b3, a ten\u2011fold improvement from the 1970s but still accounting for roughly a quarter of the water sector\u2019s energy use. Key industry players include Acciona, Dow, Siemens, DuPont, and Xylem, and desalination technologies mainly rely on thermal distillation or membrane-based reverse osmosis."
+    },
+    "automatic": {
+      "rouge1_f": 0.3741935483870968,
+      "rouge2_f": 0.1045751633986928,
+      "rougeL_f": 0.19354838709677416
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.308614800000214,
+    "tokens": 755,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_desalination",
+    "outputs": {
+      "default": "Desalination converts salt water, mainly seawater, into fresh water by removing salts and minerals, producing brine as a by\u2011product. It is a key strategy for global water security, with about 95\u202fmillion\u202fm\u00b3/day produced worldwide and growing demand, though it is energy\u2011intensive\u2014currently 3\u202fkWh/m\u00b3, a ten\u2011fold improvement from the 1970s but still accounting for a quarter of water\u2011sector energy use. Processes include thermal distillation and membrane methods such as reverse osmosis, and the industry is supported by major companies like Siemens, DuPont, and Xylem."
+    },
+    "automatic": {
+      "rouge1_f": 0.4397163120567376,
+      "rouge2_f": 0.14388489208633093,
+      "rougeL_f": 0.24113475177304963
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.001092200007406,
+    "tokens": 698,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_desalination",
+    "outputs": {
+      "default": "Desalination is the artificial process of removing salts and minerals from seawater to produce fresh water for human consumption and irrigation, serving as a critical water resource independent of rainfall. While generally more energy-intensive and costly than traditional sources, it has become a key component of global water security strategies, with worldwide production reaching approximately 95 million cubic meters per day. The industry utilizes thermal or membrane-based methods, and although energy efficiency has improved significantly since the 1970s, desalination remains a major consumer of energy within the water sector."
+    },
+    "automatic": {
+      "rouge1_f": 0.4539007092198582,
+      "rouge2_f": 0.1870503597122302,
+      "rougeL_f": 0.28368794326241137
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.2146595000085654,
+    "tokens": 623,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_desalination",
+    "outputs": {
+      "default": "Desalination is the process of converting saltwater into fresh water for human use, primarily through thermal methods like distillation or membrane-based methods like reverse osmosis. It plays a crucial role in addressing global water scarcity, especially in areas with limited freshwater sources and increasing demand. The technology has improved significantly over the years, with energy consumption decreasing and capacity increasing. Major companies in the desalination industry contribute to the development and implementation of these water treatment solutions. "
+    },
+    "automatic": {
+      "rouge1_f": 0.34375,
+      "rouge2_f": 0.07936507936507936,
+      "rougeL_f": 0.18750000000000003
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.8655622000078438,
+    "tokens": 643,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_desalination",
+    "outputs": {
+      "default": "Desalination is the process of converting salt water into fresh water through thermal or membrane-based methods, serving as an important water resource independent of rainfall. As global freshwater stress increases, desalination has become crucial for water security, with approximately 95 million cubic meters produced daily worldwide as of 2019. While desalination is more energy-intensive and costly than traditional freshwater sources, it remains necessary where alternatives are depleted or unavailable. As of 2020, global desalination capacity exceeded 97 million cubic meters per day from over 16,800 operating plants, with significant growth expected to address the global water supply gap."
+    },
+    "automatic": {
+      "rouge1_f": 0.33112582781456956,
+      "rouge2_f": 0.06711409395973156,
+      "rougeL_f": 0.19867549668874174
+    },
+    "judge_records": [],
+    "cost_usd": 0.001239,
+    "latency_s": 2.625155599991558,
+    "tokens": 679,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_desalination",
+    "outputs": {
+      "default": "Desalination converts salt water into fresh water using thermal or membrane-based methods like reverse osmosis, serving as a key strategy for global water security independent of rainfall. As of 2020, global desalination capacity reached roughly 97 million cubic meters per day from over 16,800 plants, though it remains costlier and more energy-intensive than conventional freshwater sources despite efficiency improving tenfold since 1970. Major industry players include Acciona, Dow, Siemens AG, and Xylem, while the concept dates back to ancient observations by Aristotle."
+    },
+    "automatic": {
+      "rouge1_f": 0.29629629629629634,
+      "rouge2_f": 0.045112781954887216,
+      "rougeL_f": 0.14814814814814817
+    },
+    "judge_records": [],
+    "cost_usd": 0.003312,
+    "latency_s": 4.603411600008258,
+    "tokens": 912,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_desalination",
+    "outputs": {
+      "default": "Desalination is the process of removing salts and minerals from saltwater\u2014usually seawater\u2014to produce fresh water for drinking or irrigation, leaving brine as a by-product. Because it does not depend on rainfall, it has become an important element of global water security strategies, though its energy demands make it generally more expensive than surface water, groundwater, recycling, or conservation. The main methods are thermal (distillation) and membrane-based (such as reverse osmosis), and as of 2020 more than 16,800 plants worldwide produced roughly 97 million cubic meters per day. Energy intensity has fallen dramatically, from 20\u201330 kWh/m3 in 1970 to about 3 kWh/m3 in 2018, yet desalination still accounted for roughly a quarter of the water sector's energy use in 2016."
+    },
+    "automatic": {
+      "rouge1_f": 0.38202247191011235,
+      "rouge2_f": 0.14772727272727273,
+      "rougeL_f": 0.23595505617977533
+    },
+    "judge_records": [],
+    "cost_usd": 0.010280000000000001,
+    "latency_s": 5.306228300003568,
+    "tokens": 992,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_hydroelectricity",
+    "outputs": {
+      "default": "Hydroelectric complexes, while providing the world\u2019s largest renewable electricity capacity\u2014reaching about 1,456\u202fGW in 2025\u2014pose significant environmental challenges such as loss of arable land, displacement of populations, ecosystem disruption, and risks of catastrophic dam failure. Major contributors like China, Brazil, Norway, and China have driven recent growth, with China alone adding 24\u202fGW in 2022, while global generation rose 2% to 70\u202fTWh that year. The technology\u2019s roots trace back to ancient Chinese water use and evolved through the Industrial Revolution, culminating in the first hydroelectric power scheme at Cragside, England, in 1878."
+    },
+    "automatic": {
+      "rouge1_f": 0.22314049586776857,
+      "rouge2_f": 0.03333333333333333,
+      "rougeL_f": 0.13223140495867766
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 327.1865666999947,
+    "tokens": 706,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_hydroelectricity",
+    "outputs": {
+      "default": "Hydroelectric complexes can cause significant environmental damage, including loss of arable land, displacement of people, disruption of river ecosystems, and siltation, though they also reduce flood risk; dam failure remains a catastrophic risk. In 2025, global hydropower capacity reached nearly 1,456\u202fGW, making it the largest renewable energy source and surpassing all other technologies combined, with China contributing 24\u202fGW in 2022 and Europe adding 2\u202fGW. Hydroelectricity is a major energy source in Brazil, Norway, and China, but its deployment is limited by geography and environmental concerns, prompting interest in alternatives like tidal power. Historically, water-powered mechanical energy dates back to ancient China, evolved through the Industrial Revolution, and led to the first hydroelectric scheme at Cragside in 1878."
+    },
+    "automatic": {
+      "rouge1_f": 0.2857142857142857,
+      "rouge2_f": 0.030303030303030304,
+      "rougeL_f": 0.13533834586466165
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.3094165000075009,
+    "tokens": 731,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_hydroelectricity",
+    "outputs": {
+      "default": "Hydroelectric complexes have notable environmental costs\u2014loss of farmland, displacement of people, and disruption of river ecosystems\u2014yet they are the world\u2019s largest renewable power source, with 2025 capacity near 1,456\u202fGW and generating more electricity than all other renewables combined. Major contributors include China, which added 24\u202fGW in 2022, and Europe, which added 2\u202fGW, the biggest regional increase since 1990. The technology\u2019s history stretches back to 202\u202fBC in China and the Han dynasty, with the first modern hydroelectric plant built in 1878 at Cragside, England, and the method\u2019s role in fueling the Industrial Revolution. While hydroelectricity can mitigate flooding, dam failure remains a catastrophic risk, and geographical limits and ecological concerns constrain further expansion."
+    },
+    "automatic": {
+      "rouge1_f": 0.29323308270676696,
+      "rouge2_f": 0.04545454545454546,
+      "rougeL_f": 0.14285714285714285
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.9398425999970641,
+    "tokens": 753,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_hydroelectricity",
+    "outputs": {
+      "default": "Hydropower is the world's largest renewable energy source, with global installed capacity reaching nearly 1,456 GW in 2025, driven significantly by recent expansions in China and Europe. While it plays a leading role in countries like Brazil, Norway, and China, its development is constrained by geographical limits and significant environmental impacts, including habitat disruption and population displacement. The technology has a long history, evolving from ancient mechanical uses in China to powering the Industrial Revolution, culminating in the first electrical hydroelectric scheme in England in 1878."
+    },
+    "automatic": {
+      "rouge1_f": 0.2413793103448276,
+      "rouge2_f": 0.026086956521739132,
+      "rougeL_f": 0.14655172413793105
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.9953367999987677,
+    "tokens": 606,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_hydroelectricity",
+    "outputs": {
+      "default": "Hydroelectric power, dating back to ancient China and the Industrial Revolution, has evolved over time. In the 18th century, hydraulic power initiated the Industrial Revolution, and in the late 19th century, the electrical generator was combined with hydraulics. The growing demand from the Industrial Revolution led to further development. In 1878, the world's first hydroelectric power scheme was developed in England, powering a single lamp in a gallery. Hydroelectric power remains the largest renewable energy source, surpassing other technologies combined. "
+    },
+    "automatic": {
+      "rouge1_f": 0.2755555555555555,
+      "rouge2_f": 0.04484304932735426,
+      "rougeL_f": 0.14222222222222222
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.9999893000058364,
+    "tokens": 636,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_hydroelectricity",
+    "outputs": {
+      "default": "Hydroelectric power is the largest renewable energy source globally, with installed capacity reaching nearly 1,456 GW by 2025, though construction causes significant environmental impacts including habitat disruption and population displacement. While hydropower has ancient origins dating back to 202 BC, modern hydroelectricity emerged in the late 19th century, with the world's first hydroelectric scheme developed in 1878 at Cragside in England. China dominates current hydropower expansion, adding 24 GW in 2022 alone, and hydropower generation increased by 70 TWh globally in 2022, surpassing all other renewable energy sources combined."
+    },
+    "automatic": {
+      "rouge1_f": 0.2723404255319149,
+      "rouge2_f": 0.06008583690987124,
+      "rougeL_f": 0.11914893617021277
+    },
+    "judge_records": [],
+    "cost_usd": 0.001215,
+    "latency_s": 2.84146630000032,
+    "tokens": 639,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_hydroelectricity",
+    "outputs": {
+      "default": "Hydroelectric power, while offering significant renewable energy capacity (reaching 1,456 GW globally by 2025), carries environmental costs including habitat disruption, land loss, and population displacement, with China and Europe leading recent capacity expansions. The technology's origins trace back to ancient China around 202 BC, evolving through the Industrial Revolution via innovations like B\u00e9lidor's hydraulic machines and Arkwright's water frame, culminating in the first hydroelectric scheme at Cragside, England in 1878."
+    },
+    "automatic": {
+      "rouge1_f": 0.136986301369863,
+      "rouge2_f": 0.009216589861751154,
+      "rougeL_f": 0.091324200913242
+    },
+    "judge_records": [],
+    "cost_usd": 0.003196,
+    "latency_s": 3.0606909999914933,
+    "tokens": 902,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_hydroelectricity",
+    "outputs": {
+      "default": "Hydroelectric development can carry serious environmental and social costs, including lost farmland, displaced populations, disrupted river ecosystems, altered erosion patterns, and the risk of catastrophic dam failure. Even so, hydropower remains the largest renewable energy source, with global installed capacity near 1,456 GW in 2025 and generation rising 70 TWh (2%) in 2022, led by China's 24 GW addition and Europe's largest increase since 1990. Water power dates back to 202 BC in Han dynasty China and fueled the Industrial Revolution through innovations like B\u00e9lidor's Architecture Hydraulique and Arkwright's water frame. The world's first hydroelectric scheme was built in 1878 at Cragside, England, by William Armstrong to power a single arc lamp."
+    },
+    "automatic": {
+      "rouge1_f": 0.23574144486692017,
+      "rouge2_f": 0.01532567049808429,
+      "rougeL_f": 0.0988593155893536
+    },
+    "judge_records": [],
+    "cost_usd": 0.01029,
+    "latency_s": 5.501021699994453,
+    "tokens": 994,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_silk_road",
+    "outputs": {
+      "default": "The Silk Road, named for the lucrative silk trade from China, began during the Han dynasty\u2019s expansion into Central Asia and connected East and West through the Parthian and Roman empires, bringing goods such as tea, porcelain, horses, and wine into widespread circulation. Despite its decentralized structure and sparse security\u2014making travel perilous due to banditry, nomadic raiders, and harsh terrain\u2014middlemen at key stops facilitated the exchange of commodities, ideas, and religions, notably Buddhism, across Eurasia. The network also served as a conduit for diseases like the plague, influencing major historical events such as the Black Death and the Mongol conquests."
+    },
+    "automatic": {
+      "rouge1_f": 0.3173431734317343,
+      "rouge2_f": 0.029739776951672868,
+      "rougeL_f": 0.18450184501845018
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 2.090294299996458,
+    "tokens": 686,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_silk_road",
+    "outputs": {
+      "default": "The Silk Road, named for its lucrative silk trade from China, expanded under the Han dynasty through Zhang\u202fQian\u2019s missions and the Parthian bridge to the Mediterranean, reaching Rome by the first century CE. The route facilitated exchange of goods\u2014silk, tea, porcelain, horses, wine, gold\u2014while also spreading ideas, religion, and technology such as paper and gunpowder, reshaping Eurasian politics. Though decentralized and prone to banditry, nomadic raids, and harsh terrain, the network enabled commerce and cultural contact, also transmitting diseases like the plague that contributed to events such as the Black Death."
+    },
+    "automatic": {
+      "rouge1_f": 0.2889733840304183,
+      "rouge2_f": 0.022988505747126436,
+      "rougeL_f": 0.19011406844106465
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.327571199988597,
+    "tokens": 665,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_silk_road",
+    "outputs": {
+      "default": "The Silk Road was a vast, decentralized trade network originating in China during the Han dynasty that connected East Asia to the Mediterranean, facilitating the lucrative exchange of goods such as silk, tea, and gold. Beyond commerce, the routes served as a critical conduit for the transmission of religious, philosophical, and scientific ideas, as well as the spread of diseases like the Black Death. Due to the dangers of banditry and harsh terrain, trade was conducted through a succession of middlemen rather than by single travelers, profoundly influencing the political and economic history of Eurasia."
+    },
+    "automatic": {
+      "rouge1_f": 0.3650190114068441,
+      "rouge2_f": 0.06896551724137931,
+      "rougeL_f": 0.21292775665399236
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 2.455710900001577,
+    "tokens": 550,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_silk_road",
+    "outputs": {
+      "default": "The Silk Road was a vast network of trade routes that connected the East and West during ancient times. Originating from China, silk was the primary commodity, along with other valuable items like tea, dyes, perfumes, and porcelain. This trade expanded wealth and influenced politics across Eurasia, spanning centuries and witnessing major events like the Black Death and Mongol conquests. Despite the dangers of bandits, nomadic raiders, and harsh terrain, the Silk Road facilitated the exchange of religion, philosophy, and science, shaping societies along the way and integrating diverse cultures. "
+    },
+    "automatic": {
+      "rouge1_f": 0.33333333333333326,
+      "rouge2_f": 0.06250000000000001,
+      "rougeL_f": 0.20930232558139533
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 0.8944697999977507,
+    "tokens": 591,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_silk_road",
+    "outputs": {
+      "default": "The Silk Road was a vast trade network that emerged during the Han dynasty and connected China to the Mediterranean through Central Asia, facilitated by the Parthian Empire and Roman expansion. Beyond silk and other luxury goods, the network enabled the exchange of ideas, religions, and technologies that profoundly shaped Eurasian societies, though it also spread diseases like plague. The decentralized system relied on numerous middlemen at trading posts rather than individual long-distance travelers, and participants faced constant dangers from bandits and harsh terrain. This interconnected network operated across centuries of political upheaval and fundamentally influenced the historical trajectory of multiple civilizations."
+    },
+    "automatic": {
+      "rouge1_f": 0.2952029520295203,
+      "rouge2_f": 0.029739776951672868,
+      "rougeL_f": 0.18450184501845018
+    },
+    "judge_records": [],
+    "cost_usd": 0.0011320000000000002,
+    "latency_s": 3.1523491999978432,
+    "tokens": 592,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_silk_road",
+    "outputs": {
+      "default": "The Silk Road originated with Han dynasty expansion into Central Asia around 114 BCE, connecting China to the Mediterranean via the Parthian Empire and Roman territories, and enabled trade of goods like silk, tea, horses, and gold. Beyond commerce, it facilitated the spread of religions, philosophies, scientific ideas, and diseases like the plague, significantly influencing political and cultural history across Eurasia. The network was decentralized and dangerous, with most travelers covering only portions of the route through a chain of intermediaries rather than traversing its entire length."
+    },
+    "automatic": {
+      "rouge1_f": 0.2901960784313726,
+      "rouge2_f": 0.023715415019762844,
+      "rougeL_f": 0.1568627450980392
+    },
+    "judge_records": [],
+    "cost_usd": 0.0033,
+    "latency_s": 5.145668700002716,
+    "tokens": 882,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_silk_road",
+    "outputs": {
+      "default": "The Silk Road, named for the lucrative Chinese silk trade, emerged around 114 BCE as the Han dynasty expanded into Central Asia following envoy Zhang Qian's missions, with the Parthian Empire linking it to the Mediterranean and Rome anchoring its western end. Alongside silk, goods such as tea, porcelain, perfumes, horses, and gold moved across the network, while innovations like paper and gunpowder reshaped Eurasian political history. The route was decentralized and dangerous, plagued by bandits and harsh terrain, so most merchants worked as middlemen over shorter segments rather than traveling its full length. Beyond commerce, the Silk Road spread religious, philosophical, and scientific ideas\u2014especially Buddhism\u2014as well as diseases like the plague."
+    },
+    "automatic": {
+      "rouge1_f": 0.3109540636042403,
+      "rouge2_f": 0.04270462633451957,
+      "rougeL_f": 0.16254416961130744
+    },
+    "judge_records": [],
+    "cost_usd": 0.010125,
+    "latency_s": 6.261657499999274,
+    "tokens": 957,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_geothermal_energy",
+    "outputs": {
+      "default": "Geothermal heating has been used since Paleolithic times and for space heating since the Romans, while electricity generation from geothermal sources began in the 20th century and now supplies power at a constant rate independent of weather. Although worldwide geothermal capacity reached 16\u202fGW in 2025\u2014under 1\u202f% of renewable power\u2014the resource is theoretically sufficient for global energy needs, and costs have fallen to about $0.05/kWh for new plants. The technology is concentrated near tectonic plate boundaries and supports district heating, industrial processes, and other applications, employing roughly 100,000 people worldwide."
+    },
+    "automatic": {
+      "rouge1_f": 0.26865671641791045,
+      "rouge2_f": 0.015151515151515152,
+      "rougeL_f": 0.13432835820895522
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 2.54075629998988,
+    "tokens": 693,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_geothermal_energy",
+    "outputs": {
+      "default": "Geothermal heating has been used for bathing since Paleolithic times and for space heating since Roman times, while geothermal power generation began in the 20th century and can produce electricity at a constant rate regardless of weather. The global geothermal power capacity reached 16\u202fGW in 2025\u2014less than 1\u202f% of total renewable capacity\u2014yet the technology has steadily lowered costs, with a new plant estimated at $0.05/kWh in 2021, and supports 28\u202fGW of heating for district, industrial, and agricultural uses. The industry employs about 100,000 people worldwide, and the term \u201cgeothermal\u201d derives from Greek roots meaning \u201chot Earth.\u201d"
+    },
+    "automatic": {
+      "rouge1_f": 0.2253521126760563,
+      "rouge2_f": 0.02857142857142857,
+      "rougeL_f": 0.1267605633802817
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 2.5679406999988714,
+    "tokens": 744,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_geothermal_energy",
+    "outputs": {
+      "default": "Geothermal heating has been employed for bathing since Paleolithic times and for space heating since Roman era, while power generation from geothermal sources began in the 20th century and now provides a constant electricity supply independent of weather. Global geothermal electricity capacity was 16\u202fGW in 2025, less than 1\u202f% of total renewables, but an additional 28\u202fGW is used for heating, industrial processes, desalination, and agriculture, with costs falling to about $0.05/kWh in 2021 and employing around 100,000 people in 2019. Most resources are located near tectonic plate boundaries, and historical milestones include the 15th\u2011century district heating in Chaudes\u2011Aigues and the 1827 industrial extraction of boric acid in Larderello, Italy."
+    },
+    "automatic": {
+      "rouge1_f": 0.23225806451612904,
+      "rouge2_f": 0.013071895424836602,
+      "rougeL_f": 0.10322580645161292
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.6416045999940252,
+    "tokens": 758,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_geothermal_energy",
+    "outputs": {
+      "default": "Geothermal energy, derived from the Earth's internal heat, has been utilized for bathing and heating since ancient times, with electricity generation emerging in the 20th century. Although geothermal resources are theoretically sufficient to meet global energy demands, current capacity remains less than 1% of renewable power, with most extraction occurring near tectonic plate boundaries. The industry has seen significant cost reductions and technological advancements, leading to an estimated generation cost of $0.05/kWh for new plants in 2021, while also supporting diverse applications such as district heating and industrial processes."
+    },
+    "automatic": {
+      "rouge1_f": 0.3053435114503817,
+      "rouge2_f": 0.0930232558139535,
+      "rougeL_f": 0.19847328244274806
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 2.412922699993942,
+    "tokens": 633,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_geothermal_energy",
+    "outputs": {
+      "default": "Geothermal energy, derived from the Greek roots \"Earth\" and \"hot\", has a long history of use dating back to Paleolithic times. Hot springs were utilized for bathing and Romans harnessed them for public baths and underfloor heating in Aquae Sulis (modern-day Bath, England). The earliest known geothermal district heating system, in Chaudes-Aigues, France, has been in operation since the 15th century. Geothermal power began with industrial exploitation in 1827 in Larderello, Italy, and the US implemented the first district heating system in Boise, Idaho in 1892. By 2021, the global installed capacity for geothermal power reached 14.2 GW, with over 1,000 geothermal power plants operating in over 50 countries. "
+    },
+    "automatic": {
+      "rouge1_f": 0.2236842105263158,
+      "rouge2_f": 0.04,
+      "rougeL_f": 0.15789473684210525
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.0873640999925556,
+    "tokens": 761,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_geothermal_energy",
+    "outputs": {
+      "default": "Geothermal energy has been used for bathing since Paleolithic times and for heating since Roman times, with electricity generation beginning in the 20th century. Geothermal power plants provide constant power output regardless of weather and represent theoretically adequate resources for global energy needs, though they currently supply less than 1% of renewable capacity worldwide at 16 gigawatts as of 2025. Costs have decreased significantly over recent decades, with modern plants estimated at $0.05/kWh, while geothermal heating systems provide an additional 28 gigawatts for various applications including district heating and industrial processes."
+    },
+    "automatic": {
+      "rouge1_f": 0.22727272727272727,
+      "rouge2_f": 0.06153846153846154,
+      "rougeL_f": 0.13636363636363635
+    },
+    "judge_records": [],
+    "cost_usd": 0.0012470000000000003,
+    "latency_s": 3.371279400002095,
+    "tokens": 687,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_geothermal_energy",
+    "outputs": {
+      "default": "Geothermal energy has been used for bathing since Paleolithic times and for heating since Roman times, with the oldest district heating system operating in France since the 15th century. Industrial exploitation began in 1827 in Italy, and electricity generation from geothermal sources emerged in the 20th century. By 2025, 16 gigawatts of geothermal power capacity existed worldwide alongside 28 gigawatts used for direct heating applications, with costs having fallen significantly since the 1980s to about $0.05/kWh for new plants."
+    },
+    "automatic": {
+      "rouge1_f": 0.2833333333333333,
+      "rouge2_f": 0.05084745762711864,
+      "rougeL_f": 0.18333333333333332
+    },
+    "judge_records": [],
+    "cost_usd": 0.003228,
+    "latency_s": 4.266692899996997,
+    "tokens": 914,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_geothermal_energy",
+    "outputs": {
+      "default": "Geothermal energy has been used since Paleolithic times for bathing and since Roman times for heating, with electricity generation beginning in the 20th century; unlike other renewables, geothermal plants produce power at a constant rate regardless of weather. Costs fell 25% during the 1980s and 1990s and continued declining, with the US Department of Energy estimating about $0.05/kWh for new plants in 2021. By 2025, global geothermal electricity capacity was 16 GW\u2014under 1% of renewable capacity\u2014while an additional 28 GW supplied heat for district heating, spas, industry, and agriculture, and the industry employed roughly 100,000 people as of 2019. Historical milestones include Roman baths at Aquae Sulis, a 15th-century district heating system in Chaudes-Aigues, France, industrial use of geyser steam at Larderello, Italy in 1827, and the first US district heating system in Boise, Idaho in 1892."
+    },
+    "automatic": {
+      "rouge1_f": 0.18579234972677594,
+      "rouge2_f": 0.03314917127071823,
+      "rougeL_f": 0.10928961748633882
+    },
+    "judge_records": [],
+    "cost_usd": 0.011545000000000001,
+    "latency_s": 5.9405662000062875,
+    "tokens": 1053,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_magna_carta",
+    "outputs": {
+      "default": "Magna Carta, sealed by King John on 15\u202fJune\u202f1215, was drafted by Archbishop Stephen\u202fLangton to placate rebel barons by guaranteeing church rights, protection from illegal imprisonment, swift justice, and limits on feudal payments, overseen by a council of 25 barons. Although initially annulled and leading to the First Barons' War, it was reissued in 1216, 1217, 1225, and 1297, eventually becoming part of English statute law. Over centuries it became a symbolic foundation of English constitutional thought, even as its practical legal impact waned with the rise of Parliament."
+    },
+    "automatic": {
+      "rouge1_f": 0.5192307692307693,
+      "rouge2_f": 0.28155339805825247,
+      "rougeL_f": 0.41346153846153844
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 225.88002969999798,
+    "tokens": 666,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_magna_carta",
+    "outputs": {
+      "default": "Magna Carta, sealed by King John at Runnymede on 15\u202fJune\u202f1215, was drafted by Archbishop Stephen Langton to placate rebel barons and promised protections for church rights, barons, and justice, while limiting feudal payments through a council of 25 barons. Although annulled by Pope Innocent\u202fIII and leading to the First Barons' War, it was reissued by Henry\u202fIII in 1216 and again in 1225, and later confirmed by Edward\u202fI in 1297 as part of England\u2019s statute law. Over time, the charter became a recurring renewal by successive monarchs, gradually losing practical significance as Parliament enacted new laws, yet it remained a symbolic cornerstone of English political life."
+    },
+    "automatic": {
+      "rouge1_f": 0.5438596491228069,
+      "rouge2_f": 0.2743362831858407,
+      "rougeL_f": 0.41228070175438597
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.2677338999928907,
+    "tokens": 751,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-safeguard-20b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_magna_carta",
+    "outputs": {
+      "default": "Magna Carta was a 1215 royal charter drafted by Archbishop Stephen Langton to appease rebel barons, guaranteeing church rights, protection from arbitrary imprisonment, swift justice, and limits on feudal payments, overseen by a council of 25 barons. Although annulled by Pope Innocent\u202fIII and contested during the First Barons' War, it was reissued by Henry\u202fIII in 1216, reaffirmed in 1225 and 1297, and gradually incorporated into English statute law. Over time, as Parliament enacted new legislation, its practical significance faded, but it remained a symbolic foundation for limits on royal power and the development of constitutional governance."
+    },
+    "automatic": {
+      "rouge1_f": 0.48372093023255813,
+      "rouge2_f": 0.23474178403755866,
+      "rougeL_f": 0.3627906976744185
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.0305864999972982,
+    "tokens": 676,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "qwen-3.8-27b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_magna_carta",
+    "outputs": {
+      "default": "Magna Carta is a royal charter sealed by King John of England in 1215 that established protections for church rights, barons, and access to justice, though it was initially annulled and led to the First Barons' War. The document was subsequently reissued by the regency of Henry III and later confirmed as part of England's statute law by Edward I in 1297. While not unique among contemporary legal documents, Magna Carta became a foundational element of English political life, typically renewed by monarchs until its practical significance diminished with the rise of Parliament."
+    },
+    "automatic": {
+      "rouge1_f": 0.44549763033175355,
+      "rouge2_f": 0.1626794258373206,
+      "rougeL_f": 0.2843601895734597
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.1055485999968369,
+    "tokens": 577,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "allam-2-7b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_magna_carta",
+    "outputs": {
+      "default": "Magna Carta is a historic document signed by King John of England in 1215, aimed at resolving conflicts between King John and a group of rebel barons. The charter promised rights protection, justice, and limitations on the king's powers. Although initially annulled by the Pope and later reissued by succeeding monarchs, Magna Carta gained recognition as a foundational part of English law. Its principles influenced the development of constitutional law and democracy, shaping the role of monarchs and Parliament. "
+    },
+    "automatic": {
+      "rouge1_f": 0.4467005076142132,
+      "rouge2_f": 0.19487179487179487,
+      "rougeL_f": 0.32487309644670054
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 1.024588100000983,
+    "tokens": 595,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-haiku-4-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_magna_carta",
+    "outputs": {
+      "default": "Magna Carta is a royal charter sealed by King John of England in 1215 that promised to protect church rights, limit illegal imprisonment, ensure fair justice, and restrict feudal payments to the Crown. After initial rejection and annulment by the Pope, the document was reissued multiple times by subsequent monarchs, particularly Henry III and Edward I, eventually becoming part of English statute law. Though it lost practical significance over time as Parliament passed new laws, Magna Carta became a fundamental part of English political tradition and was typically renewed by each successive monarch."
+    },
+    "automatic": {
+      "rouge1_f": 0.4380952380952381,
+      "rouge2_f": 0.17307692307692307,
+      "rougeL_f": 0.3047619047619048
+    },
+    "judge_records": [],
+    "cost_usd": 0.001063,
+    "latency_s": 2.733418100004201,
+    "tokens": 587,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-sonnet-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_magna_carta",
+    "outputs": {
+      "default": "Magna Carta was a royal charter sealed by King John of England at Runnymede in 1215, drafted to make peace with rebel barons by promising church rights, protection from illegal imprisonment, access to swift justice, and limits on feudal payments. Though initially annulled and leading to war, it was reissued by later monarchs, including Henry III and Edward I, who confirmed it as English statute law. Over time it became embedded in English political life, though it gradually lost practical significance as Parliament passed new laws, before experiencing a resurgence of interest at the end of the 16th century."
+    },
+    "automatic": {
+      "rouge1_f": 0.4999999999999999,
+      "rouge2_f": 0.2429906542056075,
+      "rougeL_f": 0.3796296296296296
+    },
+    "judge_records": [],
+    "cost_usd": 0.0031780000000000003,
+    "latency_s": 4.057524000003468,
+    "tokens": 837,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "claude-opus-5",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_magna_carta",
+    "outputs": {
+      "default": "Magna Carta was a royal charter sealed by King John at Runnymede on 15 June 1215, drafted by Archbishop Stephen Langton to settle a conflict between the king and rebel barons. It guaranteed church rights, protection from unlawful imprisonment, swift justice, and limits on feudal payments, enforced by a council of 25 barons. Both sides broke their promises and Pope Innocent III annulled the charter, sparking the First Barons' War, but it was reissued in altered forms in 1216, 1217 (when it gained its name), and 1225, and confirmed as statute law by Edward I in 1297. Though not unique among legal documents of its era, it became a fixture of English political life, gradually losing practical force as Parliament passed new laws, before interest in it revived in the late 16th century."
+    },
+    "automatic": {
+      "rouge1_f": 0.544,
+      "rouge2_f": 0.27419354838709675,
+      "rougeL_f": 0.43999999999999995
+    },
+    "judge_records": [],
+    "cost_usd": 0.009895000000000001,
+    "latency_s": 8.54385070000717,
+    "tokens": 915,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
+  },
+  {
+    "model": "gpt-oss-120b",
+    "task": "wikipedia_summarization",
+    "item_id": "wiki_silk_road",
+    "outputs": {
+      "default": "The Silk Road, named for China\u2019s lucrative silk trade, originated with the Han dynasty\u2019s expansion into Central Asia around 114\u202fBCE under envoy Zhang Qian and was later linked to the Mediterranean via the Parthian Empire and the rising Roman Empire. While the network facilitated the exchange of valuable goods\u2014silk, tea, porcelain, paper, gunpowder, horses, wine, and gold\u2014and spurred cultural, religious, and scientific diffusion, it remained decentralized and perilous, relying on a chain of middlemen rather than individual long\u2011distance travelers. This extensive trade corridor also transmitted diseases such as the plague, influencing major historical events like the Black Death and the Mongol conquests."
+    },
+    "automatic": {
+      "rouge1_f": 0.30434782608695654,
+      "rouge2_f": 0.021897810218978103,
+      "rougeL_f": 0.16666666666666669
+    },
+    "judge_records": [],
+    "cost_usd": 0.0,
+    "latency_s": 54.62081990001025,
+    "tokens": 717,
+    "error": false,
+    "empty_outputs": [],
+    "judging_skipped": false,
+    "unparsed_judges": []
   }
 ]

@@ -11,3 +11,11 @@ venv/
 # scripts/paper_stats.py, so they are part of the record, not build output.
 # A fresh `run` overwrites results/ in place; commit deliberately or archive
 # first.
+
+# Ad-hoc local scratch scripts. Anything that WRITES a human_ratings_*.csv must
+# not live here: those files are the paper's human calibration reference, and a
+# script that generates them makes the provenance of that reference unverifiable.
+scripts/rate_*.py
+scripts/perform_rating.py
+scripts/compare_ratings.py
+scripts/inspect_raw.py

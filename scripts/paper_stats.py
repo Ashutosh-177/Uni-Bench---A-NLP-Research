@@ -281,6 +281,89 @@ for t in tasks:
     friedman_report(complete.set_index("item_id")[MODELS],
                     f"{t}, corrected pipeline (complete blocks only)")
 
+section("Ablation: what each layer of the pipeline buys, against the independent rater")
+# The framework claims a multi-judge panel beats a single judge and that
+# calibration is worth doing. Neither is demonstrated by building them, so
+# each configuration is scored against the independent human rater here.
+_ref_path = RESULTS / "human_ratings_bob.csv"
+_ext_path = RESULTS / "external_judge.csv"
+if _ref_path.exists():
+    ref = {(r["model"], r["task"], r["item_id"]): float(r["human_score"])
+           for r in pd.read_csv(_ref_path).to_dict("records")}
+    ext = {}
+    if _ext_path.exists():
+        for r in pd.read_csv(_ext_path).to_dict("records"):
+            if r.get("outcome") == "ok" and r.get("judge") == "claude-sonnet-5":
+                ext[(r["model"], r["task"], r["item_id"])] = float(r["score"])
+
+    def _panel(judges=None, skip_empty=False, external=False):
+        out = {}
+        for rec in raw:
+            key = (rec["model"], rec["task"], rec["item_id"])
+            if skip_empty and any(is_empty(t) for t in rec["outputs"].values()):
+                continue
+            if external:
+                if key in ext:
+                    out[key] = ext[key]
+                continue
+            vals = [j["score"] for j in rec["judge_records"]
+                    if j.get("score") is not None and (not judges or j["judge_name"] in judges)]
+            if vals:
+                out[key] = float(np.mean(vals))
+        return out
+
+    human_rank = sorted(MODELS, key=lambda m: -np.mean([v for k, v in ref.items() if k[0] == m]))
+    print(f"{'configuration':34s} {'n':>4} {'r':>7} {'MAE':>6}  ranking vs human")
+    rows = [("single judge: gpt-oss-20b", _panel({"gpt-oss-20b"})),
+            ("single judge: gpt-oss-120b", _panel({"gpt-oss-120b"})),
+            ("single judge: qwen-3.6-27b", _panel({"qwen-3.6-27b"})),
+            ("external judge alone", _panel(external=True)),
+            ("panel of three", _panel()),
+            ("panel + empty-output exclusion", _panel(skip_empty=True))]
+    for label, sc in rows:
+        keys = [k for k in sc if k in ref]
+        if len(keys) < 3:
+            continue
+        x = np.array([sc[k] for k in keys]); y = np.array([ref[k] for k in keys])
+        means = {m: np.mean([sc[k] for k in sc if k[0] == m]) for m in MODELS
+                 if any(k[0] == m for k in sc)}
+        rank = sorted(means, key=lambda m: -means[m])
+        print(f"{label:34s} {len(keys):>4} {stats.pearsonr(x, y)[0]:>7.3f} {np.abs(x - y).mean():>6.2f}  "
+              f"{' > '.join(rank)}  [{'matches' if rank == human_rank else 'DIFFERS'}]")
+
+section("Synthetic bias injection: does the gate correct a bias that is really there?")
+# All three judges here happen to be well calibrated, so the gate declines to
+# correct any of them. That is the right call but a weak demonstration, since
+# it never shows the correction working. Injecting a known offset does.
+if cal_rows:
+    cal_df = pd.DataFrame(cal_rows)
+    print(f"{'injected':>9} {'judge':14s} {'measured':>9} {'method':>22} {'MAE raw':>8} {'MAE corr':>9} {'better':>7}")
+    for bias in [0.0, -1.0, -2.0, 2.0]:
+        for judge in ["gpt-oss-20b", "gpt-oss-120b"]:
+            d = cal_df.copy()
+            mask = d["judge_name"] == judge
+            d.loc[mask, "ai_score"] = np.clip(d.loc[mask, "ai_score"] + bias, 0, 10)
+            corr = compute_bias_corrections(d.to_dict("records"))[judge]
+            sub = d[mask]
+            a = sub["ai_score"].to_numpy(float); h = sub["human_score"].to_numpy(float)
+            raw_mae = float(np.abs(a - h).mean())
+            corr_mae = float(np.abs(np.array([corr.apply(v) for v in a]) - h).mean())
+            print(f"{bias:>+9.1f} {judge:14s} {np.mean(a - h):>+9.2f} {corr.method:>22} "
+                  f"{raw_mae:>8.2f} {corr_mae:>9.2f} {('YES' if corr_mae < raw_mae - 1e-9 else 'no'):>7}")
+    print("  A positive offset on a judge already near the 10-point ceiling is clipped away,")
+    print("  so it cannot be recovered -- a real limit of the correction, not of the gate.")
+
+section("Clustering check: leave-one-item-out vs leave-one-pair-out calibration")
+# Three judges score the same output and share its human rating, so calibration
+# pairs are clustered by item. Each judge is fitted separately, though, so
+# within one judge's fit every pair is already a distinct item -- worth
+# verifying rather than assuming.
+if cal_rows:
+    for judge, g in pd.DataFrame(cal_rows).groupby("judge_name"):
+        items = {(r["model"], r["task"], r["item_id"]) for r in g.to_dict("records")}
+        print(f"  {judge:16s} {len(g):>3} pairs over {len(items):>3} distinct items "
+              f"({'no clustering within this judge' if len(items) == len(g) else 'CLUSTERED'})")
+
 section("Illustrative paid-tier cost per item and latency ratios")
 for t in tasks:
     means = long_df[long_df["task"] == t].groupby("model")[["tokens", "latency_s"]].mean()

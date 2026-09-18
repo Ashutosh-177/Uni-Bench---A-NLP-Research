@@ -24,6 +24,9 @@ from .bias_calibration import JudgeCorrection, get_correction
 LOWER_IS_BETTER_METRICS = {
     "cost_usd", "latency_s", "tokens",
     "response_divergence", "length_asymmetry", "tone_gap",
+    # BBQ: naming a group the context does not identify, and naming the
+    # stereotyped one in particular, are both failures.
+    "bbq_stereotype_pick",
     # Reliability is a ranking criterion, not bookkeeping. Averaged over a
     # model's items this is its empty-response rate, and without it a model
     # that fails to answer can be dominant on the items it did answer.

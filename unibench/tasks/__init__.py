@@ -1,10 +1,14 @@
 from .base import Task, TaskItem
+from .bbq_task import BBQTask
 from .fairness_task import FairnessTask
 from .summarization_task import SummarizationTask
+from .wikipedia_summarization_task import WikipediaSummarizationTask
 
 TASK_REGISTRY = {
     "fairness": FairnessTask,
     "summarization": SummarizationTask,
+    "bbq_bias": BBQTask,
+    "wikipedia_summarization": WikipediaSummarizationTask,
 }
 
 
